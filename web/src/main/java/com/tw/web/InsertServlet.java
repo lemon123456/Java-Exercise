@@ -28,9 +28,8 @@ public class InsertServlet extends HttpServlet {
 //        User user = new User(id,name,sex,email,age);
 
         UserService userService = new UserService();
-        if (userService.insertUsers(name,sex,email,age)>0){
-            response.sendRedirect("/web/hello");
-        }
+        userService.insertUsers(name,sex,email,age);
+        response.sendRedirect("/web/hello");
 
     }
 

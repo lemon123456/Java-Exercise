@@ -27,10 +27,9 @@ public class ModifyServlet extends HttpServlet {
         User user = new User(id,name,sex,email,age);
 
         UserService userService = new UserService();
-        if (userService.UpdateOneUser(user)>0){
+        userService.UpdateOneUser(user);
+        response.sendRedirect("/web/hello"); /*远程定向，重定向*/
 
-            response.sendRedirect("/web/hello"); /*远程定向，重定向*/
-        }
 
     }
 

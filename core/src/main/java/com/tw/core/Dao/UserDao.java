@@ -1,6 +1,10 @@
 package com.tw.core.Dao;
 
+import com.tw.core.Util.HibernateUtil;
 import com.tw.core.entity.User;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,120 +19,114 @@ import java.util.List;
 
 public class UserDao {
 
+
     public List<User> getUsers() throws SQLException {
 
-        List<User> usersList = new ArrayList<User>();
-
-        DBConnection dbConnection = new DBConnection();
-        Connection connection = dbConnection.getConnection();
-
-        String sql = "SELECT * FROM userInfo";
-
-        Statement st = connection.createStatement();
-        ResultSet rs = st.executeQuery(sql);
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("from User"); //此处User是类名，而不是数据库的表名,select * 不写
+        List<User> usersList = query.list();
 
 
-        while (rs.next()) {
-
-            User user = new User(rs.getInt("id"),rs.getString("name"), rs.getNString("sex"), rs.getNString("email"), rs.getInt("age"));
-            usersList.add(user);
-        }
         return usersList;
+
     }
+
+    public void insertUsers(String name, String sex, String email, int age) throws SQLException {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        User user = new User();
+        user.setName(name);
+        user.setSex(sex);
+        user.setEmail(email);
+        user.setAge(age);
+
+        session.beginTransaction();
+        session.save(user);
+        session.getTransaction().commit();
+
+
+
+    }
+
+
+    public void deleteUsers(int id) throws SQLException {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        User user = new User();
+        user.setId(id);
+        session.delete(user);
+        session.getTransaction().commit();
+
+    }
+
+
 
 
 
 
     public User getOneUser(int id) throws SQLException{
 
-        DBConnection dbConnection = new DBConnection();
-        Connection connection = dbConnection.getConnection();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        User user = (User)session.get(User.class,id); //此处User是类名，而不是数据库的表名,select * 不写
 
-        String sql = "SELECT * FROM userInfo WHERE id=?";
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, id);
 
-        ResultSet rs = statement.executeQuery();
 
-        User user = new User();
-        if (rs.next()){
-            user.setId(rs.getInt("id"));
-            user.setName(rs.getString("name"));
-            user.setSex(rs.getString("sex"));
-            user.setEmail(rs.getString("email"));
-            user.setAge(rs.getInt("age"));
-        }
+
+
+
+//        DBConnection dbConnection = new DBConnection();
+//        Connection connection = dbConnection.getConnection();
+//
+//        String sql = "FROM User WHERE id=?";
+//        PreparedStatement statement = connection.prepareStatement(sql);
+//        statement.setInt(1, id);
+//
+//        ResultSet rs = statement.executeQuery();
+//
+//        User user = new User();
+//        if (rs.next()){
+//            user.setId(rs.getInt("id"));
+//            user.setName(rs.getString("name"));
+//            user.setSex(rs.getString("sex"));
+//            user.setEmail(rs.getString("email"));
+//            user.setAge(rs.getInt("age"));
+//        }
 
         return user;
     }
 
 
-    public int UpdateOneUser(User user) throws SQLException{
+    public void UpdateOneUser(User user) throws SQLException{
 
-        DBConnection dbConnection = new DBConnection();
-        Connection connection = dbConnection.getConnection();
+        Session session = HibernateUtil.getSessionFactory().openSession();
 
-        String sql = "UPDATE userInfo SET name=?,sex=?,email=?,age=? WHERE id=?";
-        PreparedStatement statement = connection.prepareStatement(sql);
+        User user_update = new User();
+        if (null != user) {
+            user_update.setId(user.getId());
+            user_update.setName(user.getName());
+            user_update.setSex(user.getSex());
+            user_update.setEmail(user.getEmail());
+            user_update.setAge(user.getAge());
 
-        statement.setString(1,user.getName());
-        statement.setString(2,user.getSex());
-        statement.setString(3,user.getEmail());
-        statement.setInt(4,user.getAge());
-        statement.setInt(5,user.getId());
+            session.beginTransaction();
+            session.update(user_update);
+            session.getTransaction().commit();
+        }
 
-        int rs = statement.executeUpdate();
-
-        return rs;
-    }
-
-    public int insertUsers(String name, String sex, String email, int age) throws SQLException {
-        DBConnection dbConnection = new DBConnection();
-        Connection connection = dbConnection.getConnection();
-
-        Statement statement = connection.createStatement();
-        String sql = "insert into userInfo (name,sex,email,age) values ('"+name+"','"+sex+"','"+email+"','"+age+"')";
-        int result = statement.executeUpdate(sql);
-//
-//        String sql = "insert into userInfo(name,gender,mailbox,age) values(?,?,?,?,?)";
-//        PreparedStatement sta = connection.prepareStatement(sql);
-//        sta.setString(1, name);
-//        sta.setString(2, sex);
-//        sta.setString(3, email);
-//        sta.setInt(4, age);
-//        sta.close();
-//        connection.close();
-        return result;
-    }
-
-
-    public int deleteUsers(int id) throws SQLException {
-        DBConnection dbConnection = new DBConnection();
-        Connection connection = dbConnection.getConnection();
-
-
-        String sql = "delete from userInfo where id=?";
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, id);
-
-        int result = statement.executeUpdate();
-
-        return result;
-
-//        String sql = "delete from userInfo where id=?";
-//        PreparedStatement st = connection.prepareStatement(sql);
-//        st.setInt(1,id);
-//        st.close();
-//        connection.close();
     }
 
 
 
 
+//    public static void main(String[] args) throws SQLException {
+//        UserDao daos = new UserDao();
+//        daos.getUsers();
+//    }
 
 
-    public static void main(String[] args) throws SQLException {
-        UserDao daos = new UserDao();
-       System.out.println(daos.getOneUser(3));
-    }
-}
+ }

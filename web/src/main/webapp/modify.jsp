@@ -19,7 +19,7 @@
 <body>
 
 <form action="/web/modify" method="post">
-  序号 :<input type = "hidden" name="id" value="<%=user.getId()%>" />
+  序号 :<input type = "text" name="id"  value="<%=user.getId()%>" />
   姓名 :<input type = "text" name="name" value="<%=user.getName()%>" />
   性别 :<input type = "text" name="sex" value="<%=user.getSex()%>"/>
   邮箱 :<input type = "text" name="email" value="<%=user.getEmail()%>"/>

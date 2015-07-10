@@ -12,23 +12,26 @@ public class UserService {
 
     UserDao userDao = new UserDao();
 
-    public int insertUsers(String name, String sex, String email, int age){
+    public void insertUsers(String name, String sex, String email, int age){
         try {
-           return userDao.insertUsers(name, sex, email, age);
+            userDao.insertUsers(name, sex, email, age);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return  0;
     }
 
-    public int deleteUsers(int id){
+    public void deleteUsers(int id){
         try {
-            return userDao.deleteUsers(id);
+            userDao.deleteUsers(id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return  0;
     }
+
+
+
+
+
 
     public User getOneUser(int id){
         try{
@@ -39,13 +42,12 @@ public class UserService {
         return null;
     }
 
-    public int UpdateOneUser(User user){
+    public void UpdateOneUser(User user){
         try{
-            return userDao.UpdateOneUser(user);
+            userDao.UpdateOneUser(user);
         }catch (SQLException e){
             e.printStackTrace();
         }
-        return 0;
     }
 
 }

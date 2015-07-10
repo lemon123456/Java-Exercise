@@ -26,24 +26,10 @@ public class DeleteServlet extends HttpServlet {
 
         int id = Integer.parseInt(request.getParameter("id"));
         UserService userService = new UserService();
-        if (userService.deleteUsers(id)>0){
-            response.sendRedirect("/web/hello");
-//            HelloServlet s = new HelloServlet();
-//            s.doGet(request, response);
+
+        userService.deleteUsers(id);
+        response.sendRedirect("/web/hello");
+
         }
-
-
-//        String name = request.getParameter("name");
-//        String sex = request.getParameter("sex");
-//        String email = request.getParameter("email");
-//        int age = Integer.parseInt(request.getParameter("age"));
-//
-//        User user = new User(name,sex,email,age);
-//
-//        UserService userService = new UserService();
-//       if (userService.deleteUsers(name)){
-//            response.sendRedirect("/web");
-//        }
-    }
 
 }
