@@ -65,7 +65,6 @@
         <td name="email"><%=userList.get(i).getEmail()%></td>
         <td name="age"><%=userList.get(i).getAge()%></td>
         <td><a href="/web/delete?id=<%=userList.get(i).getId()%>">删除</a></td>
-        <%--<td><a href="modify.jsp">修改</a></td>--%>
         <td><a href="/web/modify?id=<%=userList.get(i).getId()%>">修改</a></td>
       </tr>
       <%}}%>
@@ -75,3 +74,5 @@
     </table>
 </body>
 </html>
+
+

@@ -29,7 +29,7 @@ public class ModifyServlet extends HttpServlet {
         UserService userService = new UserService();
         if (userService.UpdateOneUser(user)>0){
 
-            response.sendRedirect("/web/hello");
+            response.sendRedirect("/web/hello"); /*远程定向，重定向*/
         }
 
     }
@@ -42,7 +42,7 @@ public class ModifyServlet extends HttpServlet {
 
         request.setAttribute("userList", user);
 
-        request.getRequestDispatcher("modify.jsp").forward(request, response);
+        request.getRequestDispatcher("modify.jsp").forward(request, response); /*直接跳转，请求转发*/
 
        // response.sendRedirect("/modify");
     }
