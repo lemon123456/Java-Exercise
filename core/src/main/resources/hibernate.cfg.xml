@@ -20,7 +20,7 @@
         <!-- 資料庫使用者 -->
         <property name="connection.username">root</property>
         <!-- 資料庫密碼 -->
-        <property name="connection.password"></property>
+        <property name="connection.password"> </property>
         <!-- Hibernate 預設的Connection pool 数据池-->
         <property name="connection.pool_size">10</property>
 
