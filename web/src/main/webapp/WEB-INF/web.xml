@@ -1,51 +1,86 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
+
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee" version="2.4"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http:/java.sun.com/dtd/web-app_2_3.dtd">
+
+    <!-- ??????? -->
     <servlet>
-        <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>com.tw.web.HelloServlet</servlet-class>
+        <servlet-name>spring-config</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!-- ?WEB???????????????Servlet??????????Servlet?????init()?? -->
+        <load-on-startup>1</load-on-startup>
     </servlet>
 
+
+    <!-- ??WEB???????Web????????????contextConfigLocation????Spring????????Spring?? -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- Spring???? -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>WEB-INF/spring-config-servlet.xml</param-value>
+    </context-param>
+
+
+
+    <!-- ?????????URL?? -->
+    <!-- ?Servlet????URL??????*??????????????????????"*.???"????????????/?????"/*"?? -->
     <servlet-mapping>
-        <servlet-name>HelloServlet</servlet-name>
-        <url-pattern>/hello</url-pattern>
+        <servlet-name>spring-config</servlet-name>
+        <url-pattern>/service/*</url-pattern>
+        <!--<url-pattern>/ws/*</url-pattern>-->
+        <!--<url-pattern>*.do</url-pattern>-->
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>InsertServlet</servlet-name>
-        <servlet-class>com.tw.web.InsertServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>InsertServlet</servlet-name>
-        <url-pattern>/insert</url-pattern>
-    </servlet-mapping>
 
 
-    <servlet>
-        <servlet-name>DeleteServlet</servlet-name>
-        <servlet-class>com.tw.web.DeleteServlet</servlet-class>
-    </servlet>
+    <!--<servlet>-->
+        <!--<servlet-name>HelloServlet</servlet-name>-->
+        <!--<servlet-class>com.tw.web.HelloServlet</servlet-class>-->
+    <!--</servlet>-->
 
-    <servlet-mapping>
-        <servlet-name>DeleteServlet</servlet-name>
-        <url-pattern>/delete</url-pattern>
-    </servlet-mapping>
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>HelloServlet</servlet-name>-->
+        <!--<url-pattern>/hello</url-pattern>-->
+    <!--</servlet-mapping>-->
 
-    <servlet>
-        <servlet-name>ModifyServlet</servlet-name>
-        <servlet-class>com.tw.web.ModifyServlet</servlet-class>
-    </servlet>
+    <!--<servlet>-->
+        <!--<servlet-name>InsertServlet</servlet-name>-->
+        <!--<servlet-class>com.tw.web.InsertServlet</servlet-class>-->
+    <!--</servlet>-->
 
-    <servlet-mapping>
-        <servlet-name>ModifyServlet</servlet-name>
-        <url-pattern>/modify</url-pattern>
-    </servlet-mapping>
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>InsertServlet</servlet-name>-->
+        <!--<url-pattern>/insert</url-pattern>-->
+    <!--</servlet-mapping>-->
 
-    
-    <welcome-file-list>
-        <welcome-file>user Information.jsp</welcome-file>
-    </welcome-file-list>
+
+    <!--<servlet>-->
+        <!--<servlet-name>DeleteServlet</servlet-name>-->
+        <!--<servlet-class>com.tw.web.DeleteServlet</servlet-class>-->
+    <!--</servlet>-->
+
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>DeleteServlet</servlet-name>-->
+        <!--<url-pattern>/delete</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--<servlet>-->
+        <!--<servlet-name>ModifyServlet</servlet-name>-->
+        <!--<servlet-class>com.tw.web.ModifyServlet</servlet-class>-->
+    <!--</servlet>-->
+
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>ModifyServlet</servlet-name>-->
+        <!--<url-pattern>/modify</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!-- -->
+    <!--<welcome-file-list>-->
+        <!--<welcome-file>user Information.jsp</welcome-file>-->
+    <!--</welcome-file-list>-->
 </web-app>
