@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee" version="2.4"
@@ -6,27 +6,24 @@
          xsi:schemaLocation="http:/java.sun.com/dtd/web-app_2_3.dtd">
 
 
+    <!-- Spring配置文件 -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/applicationContext.xml</param-value>
     </context-param>
+
+
+    <!-- 声明WEB容器监听器，在Web容器启动时自动运行，根据contextConfigLocation参数获取Spring配置文件，并启动Spring容器 -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    <servlet>
-        <servlet-name>dispatcher</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>dispatcher</servlet-name>
-        <url-pattern>*.form</url-pattern>
-    </servlet-mapping>
 
-    <display-name>Spring3MVC</display-name>
+
+    <!-- 前端分发控制器 -->
     <servlet>
         <servlet-name>spring</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!-- 在WEB应用程序启动时，就会装载并创建Servlet的实例对象、以及调用Servlet实例对象的init()方法 可以同时有多个1，按容器的加载顺序执行 -->
         <load-on-startup>1</load-on-startup>
     </servlet>
 
@@ -35,9 +32,10 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <welcome-file-list>
-        <welcome-file>user Information.jsp</welcome-file>
-    </welcome-file-list>
+
+    <!--<welcome-file-list>-->
+        <!--<welcome-file>user Information.jsp</welcome-file>-->
+    <!--</welcome-file-list>-->
 
 
 </web-app>

@@ -64,12 +64,12 @@
         <td name="sex"><%=userList.get(i).getSex()%></td>
         <td name="email"><%=userList.get(i).getEmail()%></td>
         <td name="age"><%=userList.get(i).getAge()%></td>
-        <td><a href="/web/delete?id=<%=userList.get(i).getId()%>">删除</a></td>
-        <td><a href="/web/modify?id=<%=userList.get(i).getId()%>">修改</a></td>
+        <td><a href="./delete?id=<%=userList.get(i).getId()%>">删除</a></td>
+        <td><a href="./modify?id=<%=userList.get(i).getId()%>">修改</a></td>
       </tr>
       <%}}%>
       <ul>
-        <li><a href="insert.jsp">增加用户</a></li>
+        <li><a href="./insert">增加用户</a></li>
       </ul>
     </table>
 </body>

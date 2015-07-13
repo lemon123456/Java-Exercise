@@ -5,6 +5,7 @@ import com.tw.core.entity.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import static com.tw.core.Util.HibernateUtil.*;
  */
 
 
-
+@Repository
 public class UserDao {
 
 

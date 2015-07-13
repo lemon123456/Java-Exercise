@@ -8,13 +8,17 @@
   http://www.springframework.org/schema/context
   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-    <context:component-scan base-package="com.tw.core.controller" />
 
+    <!-- 扫描类包，将标注Spring注解的类自动转化为bean，同时完成bean的注入 -->
+    <context:component-scan base-package="com.tw.core" />
+
+
+    <!-- 配置视图解析器，将ModelAndView及字符串解析为具体的页面 -->
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass"
                   value="org.springframework.web.servlet.view.JstlView" />
-        <property name="prefix" value="/" />
+        <property name="prefix" value="/WEB-INF/views/" />
         <property name="suffix" value=".jsp" />
 
     </bean>

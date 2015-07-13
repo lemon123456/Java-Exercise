@@ -18,7 +18,7 @@
 </head>
 <body>
 
-<form action="/web/modify" method="post">
+<form action="./modify" method="post">
   序号 :<input type = "text" name="id"  value="<%=user.getId()%>" readonly="readonly"/>
   姓名 :<input type = "text" name="name" value="<%=user.getName()%>" />
   性别 :<input type = "text" name="sex" value="<%=user.getSex()%>"/>
