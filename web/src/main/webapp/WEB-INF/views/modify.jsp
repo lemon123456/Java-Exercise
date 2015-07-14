@@ -12,20 +12,21 @@
 <html>
 <head>
     <title></title>
-  <%
-    User user = (User) request.getAttribute("userList");
-  %>
+    <%
+        User user = (User) request.getAttribute("userList");
+    %>
 </head>
 <body>
 
-<form action="./modify" method="post">
-  序号 :<input type = "text" name="id"  value="<%=user.getId()%>" readonly="readonly"/>
-  姓名 :<input type = "text" name="name" value="<%=user.getName()%>" />
-  性别 :<input type = "text" name="sex" value="<%=user.getSex()%>"/>
-  邮箱 :<input type = "text" name="email" value="<%=user.getEmail()%>"/>
-  年龄 :<input type = "text" name="age" value="<%=user.getAge()%>"/>
-  </br>
-  <input type = "submit" value="更新"/>
+<form action="" method="post">
+    序号 :<input type="text" name="userId" value="<%=user.getId()%>" readonly="readonly"/>
+    姓名 :<input type="text" name="name" value="<%=user.getName()%>"/>
+    性别 :<input type="text" name="sex" value="<%=user.getSex()%>"/>
+    邮箱 :<input type="text" name="email" value="<%=user.getEmail()%>"/>
+    年龄 :<input type="text" name="age" value="<%=user.getAge()%>"/>
+    密码 :<input type="text" name="password" value="<%=user.getPassword()%>">
+    </br>
+    <input type="submit" value="更新"/>
 </form>
 
 

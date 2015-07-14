@@ -49,27 +49,30 @@
     %>
     <table border="1">
       <tr>
+        <td>ID</td>
         <td>姓名</td>
         <td>性别</td>
         <td>邮箱</td>
         <td>年龄</td>
+        <td>密码</td>
       </tr>
 
       <%if(userList.size()!=0){
       for(int i=0;i<userList.size();i++){
       %>
       <tr>
-        <%--<td name="id"><%=userList.get(i).getId()%></td>--%>
+        <td name="id"><%=userList.get(i).getId()%></td>
         <td name="name"><%=userList.get(i).getName()%></td>
         <td name="sex"><%=userList.get(i).getSex()%></td>
         <td name="email"><%=userList.get(i).getEmail()%></td>
         <td name="age"><%=userList.get(i).getAge()%></td>
-        <td><a href="./delete?id=<%=userList.get(i).getId()%>">删除</a></td>
-        <td><a href="./modify?id=<%=userList.get(i).getId()%>">修改</a></td>
+        <td name="password"><%=userList.get(i).getPassword()%></td>
+        <td><a href="./users/delete?id=<%=userList.get(i).getId()%>">删除</a></td>
+        <td><a href="./users/modify?id=<%=userList.get(i).getId()%>">修改</a></td>
       </tr>
       <%}}%>
       <ul>
-        <li><a href="./insert">增加用户</a></li>
+        <li><a href="./users/insert">增加用户</a></li>
       </ul>
     </table>
 </body>

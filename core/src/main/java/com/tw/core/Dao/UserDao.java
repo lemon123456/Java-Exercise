@@ -22,6 +22,7 @@ import static com.tw.core.Util.HibernateUtil.*;
 @Repository
 public class UserDao {
 
+    PasswordEncryption passwordEncryption = new PasswordEncryption();
 
     public List<User> getUsers() throws SQLException {
 
@@ -34,7 +35,7 @@ public class UserDao {
     }
 
 
-    public void insertUsers(String name, String sex, String email, int age) throws SQLException {
+    public void insertUsers(String name, String sex, String email, int age, String password) throws SQLException {
 
         Session session = getSessionFactory().openSession();
 
@@ -43,6 +44,8 @@ public class UserDao {
         user.setSex(sex);
         user.setEmail(email);
         user.setAge(age);
+        password = passwordEncryption.encodeByMD5(password);
+        user.setPassword(password);
 
         session.beginTransaction();
         session.save(user);
@@ -89,6 +92,7 @@ public class UserDao {
             user_update.setSex(user.getSex());
             user_update.setEmail(user.getEmail());
             user_update.setAge(user.getAge());
+            user_update.setPassword(passwordEncryption.encodeByMD5(user.getPassword()));
 
             session.beginTransaction();
             session.update(user_update);
@@ -98,12 +102,31 @@ public class UserDao {
     }
 
 
+    public boolean login (String name, String password){
 
+        Session session = getSessionFactory().openSession();
+        session.beginTransaction();
 
-//    public static void main(String[] args) throws SQLException {
-//        UserDao daos = new UserDao();
-//        daos.getUsers();
-//    }
+        Query query = session.createQuery("SELECT count(*) FROM User user where user.name = :name and user.password = :password");
+
+        query.setParameter("name", name);
+        query.setParameter("password", password);
+
+        Long count = (Long)query.uniqueResult();
+
+        System.out.println(count);
+
+        if (count == 0){
+            return false;
+        }
+        session.getTransaction().commit();
+
+        return  true;
+    }
+
+        public static void main(String agrs[]) {
+        new UserDao().login("admin","123");
+    }
 
 
  }

@@ -29,26 +29,29 @@ import javax.persistence.*;
     @Column(name = "age") // 非必要，在欄位名稱與屬性名稱不同時使用
     private int age;
 
+    @Column(name = "password") // 非必要，在欄位名稱與屬性名稱不同時使用
+    private String password;
+
     // 必須要有一個預設的建構方法
     // 以使得Hibernate可以使用Constructor.newInstance()建立物件
     public User() {
     }
 
-    public User(int id, String name, String sex, String email, int age) {
+    public User(int id, String name, String sex, String email, int age,String password) {
         this.id = id;
         this.name = name;
         this.sex = sex;
         this.email = email;
         this.age = age;
+        this.password = password;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+
+
+    public void setId(int id) { this.id = id; }
+
+    public void setName(String name) { this.name = name;}
 
     public void setSex(String sex) {
         this.sex = sex;
@@ -62,13 +65,13 @@ import javax.persistence.*;
         this.age = age;
     }
 
+    public void setPassword(String password) { this.password = password;}
+
 
 
     public int getId() { return id;}
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name;}
 
     public String getSex() {
         return sex;
@@ -81,6 +84,8 @@ import javax.persistence.*;
     public int getAge() {
         return age;
     }
+
+    public String getPassword() { return password; }
 }
 //    public class User {
 //    private int id;
