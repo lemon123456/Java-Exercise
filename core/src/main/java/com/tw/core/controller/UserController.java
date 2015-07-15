@@ -71,7 +71,7 @@ public class UserController {
 //                }
 
                 CookieUtil.deleteCookie(request,response);
-                
+
                 return new ModelAndView("redirect:" + previousURL);
             }else{
                 return new ModelAndView("redirect:"+"/users");
