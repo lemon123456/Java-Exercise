@@ -2,10 +2,12 @@
 package com.tw.core.controller;
 
 import com.mysql.jdbc.StringUtils;
+import com.tw.core.Util.CookieUtil;
 import com.tw.core.entity.User;
 import com.tw.core.Dao.UserDao;
 
 import java.io.*;
+import java.net.CookieStore;
 import java.net.URLDecoder;
 import java.sql.SQLException;
 import java.util.*;
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
 
@@ -40,19 +44,37 @@ public class UserController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ModelAndView logIn(@RequestParam(value = "userName") String userName,
-                              @RequestParam(value = "password") String password, HttpSession session, HttpServletRequest request) throws SQLException {
+                              @RequestParam(value = "password") String password,
+                              HttpSession session,
+                              HttpServletRequest request,
+                              HttpServletResponse response) throws SQLException {
 
         ModelAndView modelAndView = new ModelAndView();
-        String previousURL = request.getHeader("Referer");
 
         if (userService.login(userName, password)) {
             session.setAttribute("user", userName + password);
 
-            if (previousURL.equals("http://localhost:8080/web/")) {
-                modelAndView.setViewName("user Information");
-                return modelAndView;
-            } else {
+            String previousURL = CookieUtil.getCookie("previousURL", request);
+            if (previousURL != null){
+
+//                Cookie[] cookies = request.getCookies();
+//                Cookie c = null;
+//                if (cookies != null) {
+//                    for (int i = 0; i < cookies.length; i++) {
+//                        c = cookies[i];
+//                        if (c != null) {
+//                            c.setMaxAge(0);
+//                            c.setPath("/");
+//                            response.addCookie(c);
+//                        }
+//                    }
+//                }
+
+                CookieUtil.deleteCookie(request,response);
+                
                 return new ModelAndView("redirect:" + previousURL);
+            }else{
+                return new ModelAndView("redirect:"+"/users");
             }
         } else {
             modelAndView.setViewName("login");
@@ -61,7 +83,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public ModelAndView getUsers(HttpSession session) {
+    public ModelAndView getUsers(HttpSession session,HttpServletResponse response) {
 
         ModelAndView modelAndView = new ModelAndView();
 
@@ -69,14 +91,15 @@ public class UserController {
             modelAndView.setViewName("user Information");
             return modelAndView;
         } else {
-            modelAndView.setViewName("login");
+            CookieUtil.saveCookie("previousURL", "/users", response);
+            modelAndView.setViewName("redirect:"+"/");
             return modelAndView;
         }
     }
 
 
     @RequestMapping(value = "/users/insert", method = RequestMethod.GET)
-    public ModelAndView insertUser(HttpSession session) throws SQLException {
+    public ModelAndView insertUser(HttpSession session,HttpServletResponse response) throws SQLException {
 
         ModelAndView modelAndView = new ModelAndView();
 
@@ -84,7 +107,8 @@ public class UserController {
             modelAndView.setViewName("insert");
             return modelAndView;
         } else {
-            modelAndView.setViewName("login");
+            CookieUtil.saveCookie("previousURL", "/users/insert", response);
+            modelAndView.setViewName("redirect:"+"/");
             return modelAndView;
         }
     }
@@ -125,11 +149,12 @@ public class UserController {
 
 
     @RequestMapping(value = "/users/modify", method = RequestMethod.GET)
-    public ModelAndView getOneUser(@RequestParam(value = "id") int id, HttpSession session) throws SQLException {
+    public ModelAndView getOneUser(@RequestParam(value = "id") int id, HttpSession session,HttpServletResponse response) throws SQLException {
         if (session.getAttribute("user") != null) {
             data.put("userList", userService.getOneUser(id));
             return new ModelAndView("modify", data);
         } else {
+//            CookieUtil.saveCookie("previousURL", "/users/modify", response);
             return new ModelAndView("redirect:" + "/");
         }
     }
