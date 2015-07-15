@@ -107,10 +107,12 @@ public class UserDao {
         Session session = getSessionFactory().openSession();
         session.beginTransaction();
 
+        password = passwordEncryption.encodeByMD5(password);
+
         Query query = session.createQuery("SELECT count(*) FROM User user where user.name = :name and user.password = :password");
 
         query.setParameter("name", name);
-        query.setParameter("password", password);
+        query.setParameter("password",password);
 
         Long count = (Long)query.uniqueResult();
 

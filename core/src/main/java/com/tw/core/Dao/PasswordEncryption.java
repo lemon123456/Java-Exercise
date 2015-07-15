@@ -1,10 +1,14 @@
 package com.tw.core.Dao;
 
+import org.springframework.stereotype.Repository;
+
 import java.security.MessageDigest;
 
 /**
  * Created by twer on 7/14/15.
  */
+
+@Repository
 public class PasswordEncryption {
 
     public String encodeByMD5(String originStr) {

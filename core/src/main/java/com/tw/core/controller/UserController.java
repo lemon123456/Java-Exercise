@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 
 @Controller
@@ -30,19 +31,33 @@ public class UserController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView getLoginPage() {
-        return new ModelAndView("login");
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("login");
+        return modelAndView;
     }
+
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ModelAndView logIn(@RequestParam(value = "userName") String userName,
-                              @RequestParam(value = "password") String password, HttpSession session) throws SQLException {
+                              @RequestParam(value = "password") String password, HttpSession session, HttpServletRequest request) throws SQLException {
 
-        if(userService.login(userName,password)){
-            session.setAttribute("user", userName+password);
-            return new ModelAndView("redirect:" + "/users");
+        ModelAndView modelAndView = new ModelAndView();
+        String previousURL = request.getHeader("Referer");
+
+        if (userService.login(userName, password)) {
+            session.setAttribute("user", userName + password);
+
+            if (previousURL.equals("http://localhost:8080/web/")) {
+                modelAndView.setViewName("user Information");
+                return modelAndView;
+            } else {
+                return new ModelAndView("redirect:" + previousURL);
+            }
+        } else {
+            modelAndView.setViewName("login");
+            return modelAndView;
         }
-
-        return new ModelAndView("redirect:" + "/");
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
@@ -54,9 +69,11 @@ public class UserController {
             modelAndView.setViewName("user Information");
             return modelAndView;
         } else {
-            return new ModelAndView("redirect:"+"/");
+            modelAndView.setViewName("login");
+            return modelAndView;
         }
     }
+
 
     @RequestMapping(value = "/users/insert", method = RequestMethod.GET)
     public ModelAndView insertUser(HttpSession session) throws SQLException {
@@ -67,7 +84,8 @@ public class UserController {
             modelAndView.setViewName("insert");
             return modelAndView;
         } else {
-            return new ModelAndView("redirect:"+"/");
+            modelAndView.setViewName("login");
+            return modelAndView;
         }
     }
 
@@ -112,7 +130,7 @@ public class UserController {
             data.put("userList", userService.getOneUser(id));
             return new ModelAndView("modify", data);
         } else {
-            return new ModelAndView("redirect:"+"/");
+            return new ModelAndView("redirect:" + "/");
         }
     }
 
@@ -122,7 +140,7 @@ public class UserController {
                                       @RequestParam(value = "sex") String userSex,
                                       @RequestParam(value = "email") String userEmail,
                                       @RequestParam(value = "age") int userAge,
-                                      @RequestParam(value = "password") String userPassword,HttpSession session) {
+                                      @RequestParam(value = "password") String userPassword, HttpSession session) {
         if (session.getAttribute("user") != null) {
             User user = new User();
             user.setId(userId);
@@ -132,9 +150,9 @@ public class UserController {
             user.setAge(userAge);
             user.setPassword(userPassword);
             userService.UpdateOneUser(user);
-        return new ModelAndView("redirect:" + "/users");
+            return new ModelAndView("redirect:" + "/users");
         } else {
-            return new ModelAndView("redirect:"+"/");
+            return new ModelAndView("redirect:" + "/");
         }
     }
 
