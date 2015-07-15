@@ -57,19 +57,6 @@ public class UserController {
             String previousURL = CookieUtil.getCookie("previousURL", request);
             if (previousURL != null){
 
-//                Cookie[] cookies = request.getCookies();
-//                Cookie c = null;
-//                if (cookies != null) {
-//                    for (int i = 0; i < cookies.length; i++) {
-//                        c = cookies[i];
-//                        if (c != null) {
-//                            c.setMaxAge(0);
-//                            c.setPath("/");
-//                            response.addCookie(c);
-//                        }
-//                    }
-//                }
-
                 CookieUtil.deleteCookie(request,response);
 
                 return new ModelAndView("redirect:" + previousURL);
@@ -181,5 +168,10 @@ public class UserController {
         }
     }
 
+    @RequestMapping(value = "/users/logout", method = RequestMethod.GET)
+    public ModelAndView destroySession(HttpServletRequest request){
+        request.getSession().invalidate();
+        return new ModelAndView("redirect:"+"/");
+    }
 
 }

@@ -43,6 +43,7 @@
       <%--</tr>--%>
     <%--</table>--%>
 
+   <li> <a href="/web/users/logout">logout</a> </li>
 
      <% UserDao userDao = new UserDao();
         List<User> userList = userDao.getUsers();
