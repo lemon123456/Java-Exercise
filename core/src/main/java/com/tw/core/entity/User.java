@@ -5,142 +5,89 @@ import javax.persistence.*;
  * Created by twer on 7/7/15.
  */
 
+@Entity //@Entity 注解将一个类声明为实体 Bean
+@Table(name = "User")
 
+public class User {
 
-    @Entity
-    @Table(name = "userInfo")
+    @Id //@Id 注解声明了该实体Bean的标识属性
+    @GeneratedValue(strategy = GenerationType.AUTO)  //@Id 注解可将实体Bean中某个属性定义为主键，使用@GenerateValue注解可以定义该标识符的生成策略。
 
-
-    public class User {
-
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id") // 非必要，在欄位名稱與屬性名稱不同時使用
+    @Column(name = "id")
     private int id;
-
-    @Column(name = "name") // 非必要，在欄位名稱與屬性名稱不同時使用
+    @Column(name = "name")
     private String name;
-
-    @Column(name = "sex") // 非必要，在欄位名稱與屬性名稱不同時使用
+    @Column(name = "sex")
     private String sex;
-
-    @Column(name = "email") // 非必要，在欄位名稱與屬性名稱不同時使用
-    private String email;
-
-    @Column(name = "age") // 非必要，在欄位名稱與屬性名稱不同時使用
+    @Column(name = "age")
     private int age;
-
-    @Column(name = "password") // 非必要，在欄位名稱與屬性名稱不同時使用
+    @Column(name = "password")
     private String password;
+    @Column(name = "employeeId")
+    private int employeeId;
 
-    // 必須要有一個預設的建構方法
-    // 以使得Hibernate可以使用Constructor.newInstance()建立物件
     public User() {
     }
 
-    public User(int id, String name, String sex, String email, int age,String password) {
-        this.id = id;
+    public User(String name, String sex, int age, String password, int employeeId) {
         this.name = name;
         this.sex = sex;
-        this.email = email;
         this.age = age;
         this.password = password;
+        this.employeeId = employeeId;
     }
 
 
-
-
-    public void setId(int id) { this.id = id; }
-
-    public void setName(String name) { this.name = name;}
-
-    public void setSex(String sex) {
-        this.sex = sex;
+    public int getId() {
+        return id;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public String getName() {
+        return name;
     }
 
-    public void setPassword(String password) { this.password = password;}
-
-
-
-    public int getId() { return id;}
-
-    public String getName() { return name;}
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getSex() {
         return sex;
     }
 
-    public String getEmail() {
-        return email;
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public int getAge() {
         return age;
     }
 
-    public String getPassword() { return password; }
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
 }
-//    public class User {
-//    private int id;
-//    private String name;
-//    private String sex;
-//    private String email;
-//    private int age;
-//
-//    public User(int id, String name, String sex, String email, int age) {
-//        this.id = id;
-//        this.name = name;
-//        this.sex = sex;
-//        this.email = email;
-//        this.age = age;
-//    }
-//
-//    public User(){
-//
-//    }
-//
-//    public int getId(){return id;}
-//    public void setId(int id){this.id = id;}
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    public String getSex() {
-//        return sex;
-//    }
-//
-//    public void setSex(String sex) {
-//        this.sex = sex;
-//    }
-//
-//    public String getEmail() {
-//        return email;
-//    }
-//
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
-//
-//    public int getAge() {
-//        return age;
-//    }
-//
-//    public void setAge(int age) {
-//        this.age = age;
-//    }
-//}
+
+
 
 
 

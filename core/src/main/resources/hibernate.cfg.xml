@@ -25,9 +25,12 @@
         <property name="connection.pool_size">10</property>
 
 
-        <!-- 以下設置物件與資料庫表格映射文件 -->
+        <!-- 所有需要映射的实体都必须在这里说明 -->
         <mapping class="com.tw.core.entity.User"/>
-
+        <mapping class="com.tw.core.entity.Employee"/>
+        <mapping class="com.tw.core.entity.Customer"/>
+        <mapping class="com.tw.core.entity.Courses"/>
+        <mapping class="com.tw.core.entity.CourseTime"/>
     </session-factory>
 
 </hibernate-configuration>

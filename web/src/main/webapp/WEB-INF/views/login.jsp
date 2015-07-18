@@ -15,7 +15,7 @@
 <h3>Login with Username and Password (Customer Page)</h3>
 
 <form action="/web/" method="post">
-  用户名:<input type="text" name="userName" value=""/>
+  用户名:<input type="text" name="name" value=""/>
   密&nbsp;&nbsp;码:<input type="password" name="password" value=""/>
   <input type="submit" value=" 登 录 "  />
   <input type="reset" value=" 重 置 " />

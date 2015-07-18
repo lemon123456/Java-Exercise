@@ -43,16 +43,15 @@ public class UserController {
 
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ModelAndView logIn(@RequestParam(value = "userName") String userName,
+    public ModelAndView logIn(@RequestParam(value = "name") String name,
                               @RequestParam(value = "password") String password,
                               HttpSession session,
                               HttpServletRequest request,
                               HttpServletResponse response) throws SQLException {
 
         ModelAndView modelAndView = new ModelAndView();
-
-        if (userService.login(userName, password)) {
-            session.setAttribute("user", userName + password);
+        if (userService.login(name, password)) {
+            session.setAttribute("user", name );
 
             String previousURL = CookieUtil.getCookie("previousURL", request);
             if (previousURL != null){
@@ -72,16 +71,13 @@ public class UserController {
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ModelAndView getUsers(HttpSession session,HttpServletResponse response) {
 
-        ModelAndView modelAndView = new ModelAndView();
-
         if (session.getAttribute("user") != null) {
-            modelAndView.setViewName("user Information");
-            return modelAndView;
+            return new ModelAndView("user Information","userList",userService.getUsers());
         } else {
             CookieUtil.saveCookie("previousURL", "/users", response);
-            modelAndView.setViewName("redirect:"+"/");
-            return modelAndView;
+            return new ModelAndView("redirect:"+"/");
         }
+
     }
 
 
@@ -103,18 +99,13 @@ public class UserController {
     @RequestMapping(value = "/users/insert", method = RequestMethod.POST)
     public ModelAndView insertUser(@RequestParam(value = "name") String userName,
                                    @RequestParam(value = "sex") String userSex,
-                                   @RequestParam(value = "email") String userEmail,
                                    @RequestParam(value = "age") int userAge,
-                                   @RequestParam(value = "password") String userPassword, HttpSession session) throws SQLException {
+                                   @RequestParam(value = "password") String userPassword,
+                                   @RequestParam(value = "employeeId") int employeeId,HttpSession session) throws SQLException {
 
         if (session.getAttribute("user") != null) {
-            User user = new User();
-            user.setName(userName);
-            user.setSex(userSex);
-            user.setEmail(userEmail);
-            user.setAge(userAge);
-            user.setPassword(userPassword);
-            userService.insertUsers(user.getName(), user.getSex(), user.getEmail(), user.getAge(), user.getPassword());
+            User user = new User(userName,userSex,userAge,userPassword,employeeId);
+            userService.insertUsers(user);
             data.put("userList", userService.getUsers());
             return new ModelAndView("redirect:" + "/users");
         } else {
@@ -138,29 +129,28 @@ public class UserController {
     @RequestMapping(value = "/users/modify", method = RequestMethod.GET)
     public ModelAndView getOneUser(@RequestParam(value = "id") int id, HttpSession session,HttpServletResponse response) throws SQLException {
         if (session.getAttribute("user") != null) {
-            data.put("userList", userService.getOneUser(id));
-            return new ModelAndView("modify", data);
+            return new ModelAndView("modify", "user",userService.getOneUser(id));
         } else {
-//            CookieUtil.saveCookie("previousURL", "/users/modify", response);
             return new ModelAndView("redirect:" + "/");
         }
     }
 
     @RequestMapping(value = "/users/modify", method = RequestMethod.POST)
-    public ModelAndView updateOneUser(@RequestParam(value = "userId") int userId,
+    public ModelAndView updateOneUser(@RequestParam(value = "id") int userId,
                                       @RequestParam(value = "name") String userName,
                                       @RequestParam(value = "sex") String userSex,
-                                      @RequestParam(value = "email") String userEmail,
                                       @RequestParam(value = "age") int userAge,
-                                      @RequestParam(value = "password") String userPassword, HttpSession session) {
+                                      @RequestParam(value = "password") String userPassword,
+                                      @RequestParam(value = "employeeId") int employeeId,
+                                      HttpSession session) {
         if (session.getAttribute("user") != null) {
             User user = new User();
             user.setId(userId);
             user.setName(userName);
             user.setSex(userSex);
-            user.setEmail(userEmail);
             user.setAge(userAge);
             user.setPassword(userPassword);
+            user.setEmployeeId(employeeId);
             userService.UpdateOneUser(user);
             return new ModelAndView("redirect:" + "/users");
         } else {

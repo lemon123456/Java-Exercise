@@ -5,73 +5,44 @@
   Time: 1:47 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8"%>
-<%@ page import="java.sql.*,java.text.*,java.util.*"%>
-<%@ page import="com.tw.core.Dao.UserDao" %>
-<%@ page import="java.io.PrintWriter" %>
-<%@ page import="com.tw.core.entity.User" %>
+<%@ taglib uri="http://www.springframework.org/tags"  prefix="spring"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <html>
 <head>
-    <title>第一个JSP程序</title>
+    <title>用户管理</title>
 </head>
 <body>
-    <%--<table border="1">--%>
-      <%--<tr>--%>
-        <%--<td>姓名</td>--%>
-        <%--<td>性别</td>--%>
-        <%--<td>邮箱</td>--%>
-        <%--<td>年龄</td>--%>
-      <%--</tr>--%>
-      <%--<tr>--%>
-        <%--<td>韩玲</td>--%>
-        <%--<td>女</td>--%>
-        <%--<td>163@163.com</td>--%>
-        <%--<td>12</td>--%>
-      <%--</tr>--%>
-      <%--<tr>--%>
-        <%--<td>吴天</td>--%>
-        <%--<td>男</td>--%>
-        <%--<td>163@163.com</td>--%>
-        <%--<td>12</td>--%>
-      <%--</tr>--%>
-      <%--<tr>--%>
-        <%--<td>张贵</td>--%>
-        <%--<td>男</td>--%>
-        <%--<td>163@163.com</td>--%>
-        <%--<td>77</td>--%>
-      <%--</tr>--%>
-    <%--</table>--%>
 
+   <ul>
    <li> <a href="/web/users/logout">logout</a> </li>
-
-     <% UserDao userDao = new UserDao();
-        List<User> userList = userDao.getUsers();
-    %>
+   </ul>
     <table border="1">
       <tr>
-        <td>ID</td>
         <td>姓名</td>
         <td>性别</td>
-        <td>邮箱</td>
         <td>年龄</td>
         <td>密码</td>
+        <td>工号</td>
+        <td>删除用户</td>
+        <td>修改信息</td>
       </tr>
 
-      <%if(userList.size()!=0){
-      for(int i=0;i<userList.size();i++){
-      %>
+
+    <c:forEach items="${userList}" var="user">
       <tr>
-        <td name="id"><%=userList.get(i).getId()%></td>
-        <td name="name"><%=userList.get(i).getName()%></td>
-        <td name="sex"><%=userList.get(i).getSex()%></td>
-        <td name="email"><%=userList.get(i).getEmail()%></td>
-        <td name="age"><%=userList.get(i).getAge()%></td>
-        <td name="password"><%=userList.get(i).getPassword()%></td>
-        <td><a href="./users/delete?id=<%=userList.get(i).getId()%>">删除</a></td>
-        <td><a href="./users/modify?id=<%=userList.get(i).getId()%>">修改</a></td>
+        <td>${user.name}</td>
+        <td>${user.sex}</td>
+        <td>${user.age}</td>
+        <td>${user.password}</td>
+        <td>${user.employeeId}</td>
+        <td><a href="./users/delete?id=${user.id}">删除用户</a></td>
+        <td><a href="./users/modify?id=${user.id}">修改信息</a></td>
       </tr>
-      <%}}%>
+    </c:forEach>
+
+
       <ul>
         <li><a href="./users/insert">增加用户</a></li>
       </ul>

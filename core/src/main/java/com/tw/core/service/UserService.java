@@ -27,9 +27,9 @@ public class UserService {
         return null;
     }
 
-    public void insertUsers(String name, String sex, String email, int age, String password){
+    public void insertUsers(User user){
         try {
-            userDao.insertUsers(name, sex, email, age, password);
+            userDao.insertUsers(user);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -71,4 +71,12 @@ public class UserService {
         return false;
     }
 
+//    public static void main(String arg[]){
+//        UserService userService = new UserService();
+//        try{
+//            System.out.println(userService.getUsers());
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//    }
 }

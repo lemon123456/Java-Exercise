@@ -6,7 +6,7 @@
          xsi:schemaLocation="http:/java.sun.com/dtd/web-app_2_3.dtd">
 
 
-    <!-- Spring配置文件 -->
+    <!-- Spring配置文件 默认是在下列路径中加载（可省略），文件名称自定时必须说明下列内容-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/applicationContext.xml</param-value>
