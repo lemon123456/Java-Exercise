@@ -4,6 +4,7 @@ create table Employee (
     role VARCHAR(40) NOT NULL
 );
 
+
 INSERT INTO Employee (name,role) VALUES ("李一","OPs");
 INSERT INTO Employee (name,role) VALUES ("李二","HR");
 INSERT INTO Employee (name,role) VALUES ("李三","COACH");
