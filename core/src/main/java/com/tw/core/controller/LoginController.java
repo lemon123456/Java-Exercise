@@ -54,7 +54,14 @@ public class LoginController {
                 return new ModelAndView("redirect:"+"/users");
             }
         } else {
-            return new ModelAndView("login");
+            return new ModelAndView("loginError");
         }
+    }
+
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public ModelAndView destroySession(HttpServletRequest request){
+        request.getSession().invalidate();
+        return new ModelAndView("redirect:"+"/");
     }
 }

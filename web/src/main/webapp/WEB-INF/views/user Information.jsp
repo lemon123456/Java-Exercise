@@ -16,7 +16,7 @@
 <body>
 
    <ul>
-   <li> <a href="/web/users/logout">logout</a> </li>
+   <li> <a href="/web/logout">logout</a> </li>
    </ul>
     <table border="1">
       <tr>

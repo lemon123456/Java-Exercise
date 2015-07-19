@@ -122,10 +122,6 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public ModelAndView destroySession(HttpServletRequest request){
-        request.getSession().invalidate();
-        return new ModelAndView("redirect:"+"/");
-    }
+
 
 }
