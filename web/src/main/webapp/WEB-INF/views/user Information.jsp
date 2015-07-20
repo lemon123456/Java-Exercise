@@ -15,11 +15,19 @@
 </head>
 <body>
 
-   <ul>
-   <li> <a href="/web/logout">logout</a> </li>
-   </ul>
+      <ul><li>
+        <td><a href="/web/">&nbsp;&nbsp;首页&nbsp;&nbsp;</a></td>
+        <td><a href="/web/users">&nbsp;&nbsp;用户管理&nbsp;&nbsp;</a></td>
+        <td><a href="/web/employee">&nbsp;&nbsp;员工管理&nbsp;&nbsp;</a></td>
+        <td><a href="/web/courses">&nbsp;&nbsp;课程管理&nbsp;&nbsp;</a></td>
+        <td><a href="/web/customer">&nbsp;&nbsp;顾客管理&nbsp;&nbsp;</a></td>
+        <td> <a href="/web/login/logout">&nbsp;&nbsp;logout&nbsp;&nbsp;</a> </td>
+       </li></ul>
+
+
     <table border="1">
       <tr>
+        <td>编号</td>
         <td>姓名</td>
         <td>性别</td>
         <td>年龄</td>
@@ -32,6 +40,7 @@
 
     <c:forEach items="${userList}" var="user">
       <tr>
+        <td>${user.id}</td>
         <td>${user.name}</td>
         <td>${user.sex}</td>
         <td>${user.age}</td>

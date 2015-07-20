@@ -6,27 +6,19 @@ import javax.persistence.*;
  * Created by twer on 7/17/15.
  */
 @Entity
-@Table(name = "Customer")
+@Table(name = "CustomerController")
 public class Customer {
+
+    private int id;
+    private String customerName;
+//    private int coachId;
+
+    private Employee employee;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     @Column(name = "id")
-    private int id;
-    @Column(name = "customerName")
-    private String customerName;
-    @Column(name = "coachId")
-    private int coachId;
-
-    public Customer() {
-    }
-
-    public Customer(int coachId, String customerName) {
-        this.coachId = coachId;
-        this.customerName = customerName;
-    }
-
     public int getId() {
         return id;
     }
@@ -35,6 +27,7 @@ public class Customer {
         this.id = id;
     }
 
+    @Column(name = "customerName")
     public String getCustomerName() {
         return customerName;
     }
@@ -43,11 +36,26 @@ public class Customer {
         this.customerName = customerName;
     }
 
-    public int getCoachId() {
-        return coachId;
+//    @Column(name = "coachId")
+//    public int getCoachId() {
+//        return coachId;
+//    }
+//
+//    public void setCoachId(int coachId) {
+//        this.coachId = coachId;
+//    }
+
+    public Customer() {
     }
 
-    public void setCoachId(int coachId) {
-        this.coachId = coachId;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="coachId")
+    public Employee getEmployee()
+    {
+        return employee;
+    }
+    public void setEmployee(Employee employee)
+    {
+        this.employee = employee;
     }
 }

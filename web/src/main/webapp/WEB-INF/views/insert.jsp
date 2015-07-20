@@ -15,11 +15,14 @@
 
 
   <form action="/web/users/insert" method="post">
-    姓名 :<input type = "text" name="name" value=""/>
+    账号 :<input type = "text" name="name" value=""/>
     性别 :<input type = "text" name="sex" value=""/>
     年龄 :<input type = "text" name="age" value=""/>
     密码 :<input type = "text" name="password" value=""/>
-    工号 :<input type = "text" name="employeeId" value="" />
+    <ul></ul>
+    工号 :<input type = "text" name="employeeId" value="">
+    <%--姓名 :<input type = "text" name="employeeName" value="">--%>
+    <%--岗位 :<input type = "text" name="employeeRole" value="">--%>
     </br>
     <input type = "submit" value="提交"/>
   </form>

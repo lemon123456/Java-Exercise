@@ -1,6 +1,12 @@
 package com.tw.core.entity;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
+import javax.persistence.metamodel.ListAttribute;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by twer on 7/17/15.  name,role
@@ -9,25 +15,16 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Employee")
 public class Employee {
+    private int id;
+    private String name;
+    private String role;
+
+//    private Set<Customer> customers;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     @Column(name = "id")
-    private int id;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "role")
-    private String role;
-
-    public Employee() {
-    }
-
-    public Employee(String name, String role) {
-        this.name = name;
-        this.role = role;
-    }
-
     public int getId() {
         return id;
     }
@@ -36,6 +33,7 @@ public class Employee {
         this.id = id;
     }
 
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -44,6 +42,7 @@ public class Employee {
         this.name = name;
     }
 
+    @Column(name = "role")
     public String getRole() {
         return role;
     }
@@ -51,4 +50,27 @@ public class Employee {
     public void setRole(String role) {
         this.role = role;
     }
+
+
+    public Employee(){
+
+    }
+//    public Employee(int id, String name, String role) {
+//        this.id = id;
+//        this.name = name;
+//        this.role = role;
+//    }
+
+
+//    @OneToMany(mappedBy="")　
+//    @LazyCollection(LazyCollectionOption.EXTRA)
+//    Set<Customer> getCustomers()
+//    {
+//        return customers;
+//    }
+//
+//    public void setCustomers(Set<Customer> customers)
+//    {
+//        this.customers = customers;
+//    }
 }

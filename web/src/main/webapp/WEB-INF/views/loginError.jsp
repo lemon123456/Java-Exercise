@@ -13,7 +13,7 @@
 <body>
   <form action="/web/logError" method="post">
     <p>用户名或密码错误</p>
-    <a href="/web">返回重新登录</a>
+    <a href="/web/login">返回重新登录</a>
   </form>
 </body>
 </html>

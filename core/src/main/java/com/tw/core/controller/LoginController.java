@@ -19,13 +19,13 @@ import java.sql.SQLException;
  */
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/login")
 public class LoginController {
     @Autowired
     private UserService userService;
 
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping( method = RequestMethod.GET)
     public ModelAndView getLoginPage() {
 
         ModelAndView modelAndView = new ModelAndView();
@@ -34,7 +34,7 @@ public class LoginController {
     }
 
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping( method = RequestMethod.POST)
     public ModelAndView logIn(@RequestParam(value = "name") String name,
                               @RequestParam(value = "password") String password,
                               HttpSession session,
@@ -62,6 +62,6 @@ public class LoginController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public ModelAndView destroySession(HttpServletRequest request){
         request.getSession().invalidate();
-        return new ModelAndView("redirect:"+"/");
+        return new ModelAndView("redirect:"+"/login");
     }
 }

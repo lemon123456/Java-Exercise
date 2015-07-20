@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 import com.tw.core.service.UserService;
+import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,7 @@ public class UserController {
             return new ModelAndView("user Information","userList",userService.getUsers());
         } else {
             CookieUtil.saveCookie("previousURL", "/users", response);
-            return new ModelAndView("redirect:"+"/");
+            return new ModelAndView("redirect:"+"/login");
         }
 
     }
@@ -56,7 +57,7 @@ public class UserController {
             return modelAndView;
         } else {
             CookieUtil.saveCookie("previousURL", "/users/insert", response);
-            modelAndView.setViewName("redirect:"+"/");
+            modelAndView.setViewName("redirect:"+"/login");
             return modelAndView;
         }
     }
@@ -66,14 +67,22 @@ public class UserController {
                                    @RequestParam(value = "sex") String userSex,
                                    @RequestParam(value = "age") int userAge,
                                    @RequestParam(value = "password") String userPassword,
-                                   @RequestParam(value = "employeeId") int employeeId,HttpSession session) throws SQLException {
+                                   @RequestParam(value = "employeeId") int employeeId,
+                                   HttpSession session) throws SQLException {
 
         if (session.getAttribute("user") != null) {
-            User user = new User(userName,userSex,userAge,userPassword,employeeId);
+
+            User user = new User();
+            user.setName(userName);
+            user.setSex(userSex);
+            user.setAge(userAge);
+            user.setPassword(userPassword);
+            user.setEmployeeId(employeeId);
+
             userService.insertUsers(user);
             return new ModelAndView("redirect:" + "/users");
         } else {
-            return new ModelAndView("redirect:" + "/");
+            return new ModelAndView("redirect:" + "/login");
         }
 
     }
@@ -85,7 +94,7 @@ public class UserController {
             userService.deleteUsers(id);
             return new ModelAndView("redirect:" + "/users");
         } else {
-            return new ModelAndView("redirect:" + "/");
+            return new ModelAndView("redirect:" + "/login");
         }
     }
 
@@ -95,7 +104,7 @@ public class UserController {
         if (session.getAttribute("user") != null) {
             return new ModelAndView("modify", "user",userService.getOneUser(id));
         } else {
-            return new ModelAndView("redirect:" + "/");
+            return new ModelAndView("redirect:" + "/login");
         }
     }
 
@@ -118,7 +127,7 @@ public class UserController {
             userService.UpdateOneUser(user);
             return new ModelAndView("redirect:" + "/users");
         } else {
-            return new ModelAndView("redirect:" + "/");
+            return new ModelAndView("redirect:" + "/login");
         }
     }
 

@@ -13,31 +13,28 @@ public class User {
     @Id //@Id 注解声明了该实体Bean的标识属性
     @GeneratedValue(strategy = GenerationType.AUTO)  //@Id 注解可将实体Bean中某个属性定义为主键，使用@GenerateValue注解可以定义该标识符的生成策略。
 
-    @Column(name = "id")
     private int id;
-    @Column(name = "name")
     private String name;
-    @Column(name = "sex")
     private String sex;
-    @Column(name = "age")
     private int age;
-    @Column(name = "password")
     private String password;
-    @Column(name = "employeeId")
     private int employeeId;
+//    private Employee employee;
 
-    public User() {
+    public User(){
+
     }
 
-    public User(String name, String sex, int age, String password, int employeeId) {
+    public User(String name, String sex, int age, String password,int employeeId) {
         this.name = name;
         this.sex = sex;
         this.age = age;
         this.password = password;
         this.employeeId = employeeId;
     }
-    
 
+
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -46,6 +43,7 @@ public class User {
         this.id = id;
     }
 
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -54,6 +52,7 @@ public class User {
         this.name = name;
     }
 
+    @Column(name = "sex")
     public String getSex() {
         return sex;
     }
@@ -62,6 +61,7 @@ public class User {
         this.sex = sex;
     }
 
+    @Column(name = "age")
     public int getAge() {
         return age;
     }
@@ -70,6 +70,8 @@ public class User {
         this.age = age;
     }
 
+
+    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -78,6 +80,8 @@ public class User {
         this.password = password;
     }
 
+
+    @Column(name = "employeeId")
     public int getEmployeeId() {
         return employeeId;
     }
@@ -85,6 +89,16 @@ public class User {
     public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
     }
+
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name="employeeId")
+//    public Employee getEmployee() {
+//        return employee;
+//    }
+//
+//    public void setEmployee(Employee employee) {
+//        this.employee = employee;
+//    }
 }
 
 

@@ -99,8 +99,7 @@ public class UserDao {
     }
 
 
-    public boolean login (String name, String password){
-
+    public boolean login (String name, String password) throws SQLException{
         Session session = getSessionFactory().openSession();
         session.beginTransaction();
 
@@ -122,9 +121,13 @@ public class UserDao {
     }
 
 
-    public static void main(String agrs[]) {
+    public static void main(String agrs[]) throws SQLException{
         UserDao userdao = new UserDao();
-        userdao.login("admin1","123");
+        if (userdao.login("admin1","123")){
+            System.out.println("right");
+        }else{
+            System.out.println("wrong");
+        }
     }
 
 
