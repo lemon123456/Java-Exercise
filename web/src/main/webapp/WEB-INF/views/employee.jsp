@@ -39,14 +39,13 @@
           <td>${employee.id}</td>
           <td>${employee.name}</td>
           <td>${employee.role}</td>
-          <%--<td>${employee.userId}</td>--%>
-          <%--<td><a href="./users/modify?id=${user.id}">修改信息</a></td>--%>
+          <td><a href="./employee/modify/${employee.id}">修改信息</a></td>
         </tr>
       </c:forEach>
 
   </table>
 
-<ul><ul></ul>  </ul>
+<ul><ul></ul></ul>
 
   <form action="/web/employee/insert" method="post">
     <table border="1">

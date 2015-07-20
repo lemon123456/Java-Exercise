@@ -4,7 +4,7 @@ create table User(
     sex VARCHAR(20) NOT NULL,
     age INT NOT NULL,
     password VARCHAR(50) NOT NULL,
-    employeeId INT NOT NULL,
+    employeeId INT NOT NULL UNIQUE,
     foreign key(employeeId) references Employee(id) on delete cascade on update cascade
 );
 

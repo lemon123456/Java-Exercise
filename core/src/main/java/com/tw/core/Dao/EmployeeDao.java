@@ -29,57 +29,43 @@ public class EmployeeDao {
     }
 
 
-//    public void inserEmployee(Employee employee) throws SQLException {
-//
-//        Session session = getSessionFactory().openSession();
-//        session.beginTransaction();
-//
-//        session.save(employee);
-//        session.getTransaction().commit();
-//        session.close();
-//    }
-//
-//
-//    public void deleteEmployee(int id) throws SQLException {
-//
-//        Session session = getSessionFactory().openSession();
-//        session.beginTransaction();
-//
-//        Employee employee = new Employee();
-//        employee.setId(id);
-//        session.delete(employee);
-//        session.getTransaction().commit();
-//
-//        session.close();
-//    }
-//
-//
-//
-//    public Employee getOneEmployee(int id) throws SQLException{
-//
-//        Session session = getSessionFactory().openSession();
-//        session.beginTransaction();
-//        Employee employee = (Employee)session.get(Employee.class,id);
-//
-//        session.close();
-//        return employee;
-//    }
-//
-//
-//    public void UpdateOneEmployee(Employee employee) throws SQLException{
-//
-//        Session session = getSessionFactory().openSession();
-//        session.beginTransaction();
-//
-//        session.update(employee);
-//        session.getTransaction().commit();
-//        session.close();
-//    }
+    public void insertEmployee(Employee employee) throws SQLException {
+
+        Session session = getSessionFactory().openSession();
+        session.beginTransaction();
+        session.save(employee);
+        session.getTransaction().commit();
+        session.close();
+    }
+
+
+
+
+    public Employee getOneEmployee(int id) throws SQLException{
+
+        Session session = getSessionFactory().openSession();
+        session.beginTransaction();
+        Employee employee = (Employee)session.get(Employee.class,id);
+
+        session.close();
+        return employee;
+    }
+
+
+    public void UpdateOneEmployee(Employee employee) throws SQLException{
+
+        Session session = getSessionFactory().openSession();
+        session.beginTransaction();
+
+        session.update(employee);
+        session.getTransaction().commit();
+        session.close();
+    }
 
 
     public static void main(String arg[]) throws SQLException{
         EmployeeDao employeeDao = new EmployeeDao();
-        System.out.println(employeeDao.getEmployees());
+        System.out.println(employeeDao.getOneEmployee(1).getId());
     }
 
 }

@@ -15,7 +15,7 @@
 
 
   <form action="/web/users/insert" method="post">
-    账号 :<input type = "text" name="name" value=""/>
+    用户名 :<input type = "text" name="name" value=""/>
     性别 :<input type = "text" name="sex" value=""/>
     年龄 :<input type = "text" name="age" value=""/>
     密码 :<input type = "text" name="password" value=""/>

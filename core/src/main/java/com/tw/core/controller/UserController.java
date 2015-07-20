@@ -50,15 +50,11 @@ public class UserController {
     @RequestMapping(value = "/insert", method = RequestMethod.GET)
     public ModelAndView insertUser(HttpSession session,HttpServletResponse response) throws SQLException {
 
-        ModelAndView modelAndView = new ModelAndView();
-
         if (session.getAttribute("user") != null) {
-            modelAndView.setViewName("insert");
-            return modelAndView;
+            return new ModelAndView("insert");
         } else {
             CookieUtil.saveCookie("previousURL", "/users/insert", response);
-            modelAndView.setViewName("redirect:"+"/login");
-            return modelAndView;
+            return new ModelAndView("redirect:"+"/login");
         }
     }
 

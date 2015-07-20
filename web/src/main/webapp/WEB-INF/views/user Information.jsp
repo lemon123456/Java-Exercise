@@ -28,7 +28,7 @@
     <table border="1">
       <tr>
         <td>编号</td>
-        <td>姓名</td>
+        <td>用户名</td>
         <td>性别</td>
         <td>年龄</td>
         <td>密码</td>

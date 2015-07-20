@@ -51,7 +51,7 @@ public class LoginController {
 
                 return new ModelAndView("redirect:" + previousURL);
             }else{
-                return new ModelAndView("redirect:"+"/users");
+                return new ModelAndView("redirect:"+"/");
             }
         } else {
             return new ModelAndView("loginError");
