@@ -2,10 +2,11 @@ create table Courses (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     courseName VARCHAR(40) NOT NULL,
     coachId INT NOT NULL,
-    foreign key(coachId) references Employee(id) on delete cascade on update cascade
+    time VARCHAR(40) NOT NULL,
+    foreign key(coachId) references Employee(id)
 );
 
-INSERT INTO Courses (courseName,coachId) VALUES ("swimming",3);
-INSERT INTO Courses (courseName,coachId) VALUES ("private",3);
-INSERT INTO Courses (courseName,coachId) VALUES ("running",4);
-iNSERT INTO Courses (courseName,coachId) VALUES ("private",5)
+INSERT INTO Courses (courseName,coachId,time) VALUES ("swimming",3,"星期一");
+INSERT INTO Courses (courseName,coachId,time) VALUES ("private",3,"星期二");
+INSERT INTO Courses (courseName,coachId,time) VALUES ("running",4,"星期三");
+iNSERT INTO Courses (courseName,coachId,time) VALUES ("private",5,"星期二")

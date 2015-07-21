@@ -1,17 +1,14 @@
 package com.tw.core.Dao;
 
-import com.tw.core.Util.HibernateUtil;
 import com.tw.core.entity.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.tw.core.Util.HibernateUtil.*;
+import static com.tw.core.Util.HibernateUtil.getSessionFactory;
 
 
 /**
@@ -46,7 +43,7 @@ public class UserDao {
         user_insert.setSex(user.getSex());
         user_insert.setAge(user.getAge());
         user_insert.setPassword(passwordEncryption.encodeByMD5(user.getPassword()));
-        user_insert.setEmployeeId(user.getEmployeeId());
+        user_insert.setEmployee(user.getEmployee());
 
         session.save(user_insert);
         session.getTransaction().commit();
@@ -91,7 +88,7 @@ public class UserDao {
         user_update.setSex(user.getSex());
         user_update.setAge(user.getAge());
         user_update.setPassword(user.getPassword());
-        user_update.setEmployeeId(user.getEmployeeId());
+        user_update.setEmployee(user.getEmployee());
 
         session.update(user_update);
         session.getTransaction().commit();
@@ -100,6 +97,7 @@ public class UserDao {
 
 
     public boolean login (String name, String password) throws SQLException{
+
         Session session = getSessionFactory().openSession();
         session.beginTransaction();
 
@@ -123,11 +121,7 @@ public class UserDao {
 
     public static void main(String agrs[]) throws SQLException{
         UserDao userdao = new UserDao();
-        if (userdao.login("admin1","123")){
-            System.out.println("right");
-        }else{
-            System.out.println("wrong");
-        }
+        System.out.println(userdao.login("admin1","123"));
     }
 
 

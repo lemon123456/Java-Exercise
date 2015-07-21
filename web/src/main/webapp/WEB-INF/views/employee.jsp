@@ -24,12 +24,15 @@
     </li>
   </ul>
 
+  <ul>
+    <li>员工管理页面</li>
+  </ul>
+
   <table border="1">
     <tr>
       <td>工号</td>
       <td>姓名</td>
       <td>岗位</td>
-      <%--<td>userId</td>--%>
       <td>修改信息</td>
     </tr>
 
@@ -55,8 +58,8 @@
       </tr>
 
       <tr>
-        <td><input type="text" name="name"></td>
-        <td><input type="text" name="role"></td>
+        <td><input type="text" name="name" value=""></td>
+        <td><input type="text" name="role" value=""></td>
       </tr>
     </table>
 

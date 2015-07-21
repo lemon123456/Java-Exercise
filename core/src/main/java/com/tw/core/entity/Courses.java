@@ -10,26 +10,13 @@ import javax.persistence.*;
 @Table(name = "Courses")
 public class Courses {
 
+    private int id;
+    private String courseName;
+    private Employee employee;
+    private String time;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
-    @Column(name = "id")
-    private int id;
-    @Column(name = "courseName ")
-    private String courseName;
-    @Column(name = "coachId")
-    private int coachId;
-
-
-    public Courses() {
-    }
-
-    public Courses(String courseName, int coachId) {
-        this.courseName = courseName;
-        this.coachId = coachId;
-    }
-
-
     public int getId() {
         return id;
     }
@@ -38,6 +25,7 @@ public class Courses {
         this.id = id;
     }
 
+    @Column(name = "courseName")
     public String getCourseName() {
         return courseName;
     }
@@ -46,11 +34,33 @@ public class Courses {
         this.courseName = courseName;
     }
 
-    public int getCoachId() {
-        return coachId;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="coachId")
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setCoachId(int coachId) {
-        this.coachId = coachId;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    @Column(name = "time")
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+
+    public Courses() {
+    }
+
+    public Courses(int id, String courseName, Employee employee, String time) {
+        this.id = id;
+        this.courseName = courseName;
+        this.employee = employee;
+        this.time = time;
     }
 }

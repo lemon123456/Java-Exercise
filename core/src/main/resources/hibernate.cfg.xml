@@ -24,13 +24,16 @@
         <!-- Hibernate 預設的Connection pool 数据池-->
         <property name="connection.pool_size">10</property>
 
+        <property name="hibernate.current_session_context_class">thread</property>
+
+        <property name="hibernate.enable_lazy_load_no_trans">true</property>
+
 
         <!-- 所有需要映射的实体都必须在这里说明 -->
         <mapping class="com.tw.core.entity.User"/>
         <mapping class="com.tw.core.entity.Employee"/>
         <mapping class="com.tw.core.entity.Customer"/>
         <mapping class="com.tw.core.entity.Courses"/>
-        <mapping class="com.tw.core.entity.CourseTime"/>
     </session-factory>
 
 </hibernate-configuration>

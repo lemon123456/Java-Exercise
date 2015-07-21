@@ -10,31 +10,32 @@ import javax.persistence.*;
 
 public class User {
 
-    @Id //@Id 注解声明了该实体Bean的标识属性
-    @GeneratedValue(strategy = GenerationType.AUTO)  //@Id 注解可将实体Bean中某个属性定义为主键，使用@GenerateValue注解可以定义该标识符的生成策略。
 
     private int id;
     private String name;
     private String sex;
     private int age;
     private String password;
-    private int employeeId;
-//    private Employee employee;
+//    private int employeeId;
+//    @OneToOne
+//    @JoinColumn(name="employeeId")
+    private Employee employee;
 
     public User(){
 
     }
 
-    public User(String name, String sex, int age, String password,int employeeId) {
+    public User(String name, String sex, int age, String password,Employee employee) {
         this.name = name;
         this.sex = sex;
         this.age = age;
         this.password = password;
-        this.employeeId = employeeId;
+//        this.employee = employee;
     }
 
-
-    @Column(name = "id")
+    @Id //@Id 注解声明了该实体Bean的标识属性
+    @GeneratedValue(strategy = GenerationType.AUTO)  //@Id 注解可将实体Bean中某个属性定义为主键，使用@GenerateValue注解可以定义该标识符的生成策略。
+//    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -81,24 +82,28 @@ public class User {
     }
 
 
-    @Column(name = "employeeId")
-    public int getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
-    }
-
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name="employeeId")
-//    public Employee getEmployee() {
-//        return employee;
+//    @Column(name = "employeeId")
+//    public int getEmployeeId() {
+//        return employeeId;
 //    }
 //
-//    public void setEmployee(Employee employee) {
-//        this.employee = employee;
+//    public void setEmployeeId(int employeeId) {
+//        this.employeeId = employeeId;
 //    }
+
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @OneToOne
+//    @JoinColumn(name="employeeId")
+
+    @OneToOne
+    @JoinColumn(name="employeeId")
+    public Employee getEmployee() {
+        return employee;
+    }
+//
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 }
 
 

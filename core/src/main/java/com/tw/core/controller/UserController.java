@@ -3,6 +3,7 @@ package com.tw.core.controller;
 
 import com.mysql.jdbc.StringUtils;
 import com.tw.core.Util.CookieUtil;
+import com.tw.core.entity.Employee;
 import com.tw.core.entity.User;
 import com.tw.core.Dao.UserDao;
 
@@ -12,6 +13,7 @@ import java.net.URLDecoder;
 import java.sql.SQLException;
 import java.util.*;
 
+import com.tw.core.service.EmployeeService;
 import com.tw.core.service.UserService;
 import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private EmployeeService employeeService;
     Map<String, Object> data = new HashMap<String, Object>();
 
 
@@ -73,7 +78,9 @@ public class UserController {
             user.setSex(userSex);
             user.setAge(userAge);
             user.setPassword(userPassword);
-            user.setEmployeeId(employeeId);
+//            user.setEmployeeId(employeeId);
+            Employee employee = employeeService.getOneEmployee(employeeId);
+            user.setEmployee(employee);
 
             userService.insertUsers(user);
             return new ModelAndView("redirect:" + "/users");
@@ -119,7 +126,10 @@ public class UserController {
             user.setSex(userSex);
             user.setAge(userAge);
             user.setPassword(userPassword);
-            user.setEmployeeId(employeeId);
+//            user.setEmployeeId(employeeId);
+            Employee employee = employeeService.getOneEmployee(employeeId);
+            user.setEmployee(employee);
+
             userService.UpdateOneUser(user);
             return new ModelAndView("redirect:" + "/users");
         } else {

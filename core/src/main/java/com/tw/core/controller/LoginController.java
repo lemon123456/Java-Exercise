@@ -43,7 +43,6 @@ public class LoginController {
 
         if (userService.login(name, password)) {
             session.setAttribute("user", name );
-
             String previousURL = CookieUtil.getCookie("previousURL", request);
             if (previousURL != null){
 
@@ -62,6 +61,6 @@ public class LoginController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public ModelAndView destroySession(HttpServletRequest request){
         request.getSession().invalidate();
-        return new ModelAndView("redirect:"+"/login");
+        return new ModelAndView("redirect:"+"/");
     }
 }

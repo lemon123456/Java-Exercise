@@ -2,7 +2,7 @@ create table Customer (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     customerName VARCHAR(40) NOT NULL,
     coachId INT NOT NULL,
-    foreign key(coachId) references Employee(id) on delete cascade on update cascade
+    FOREIGN KEY(coachId) REFERENCES Employee(id)
 );
 
 INSERT INTO Customer(customerName,coachId) VALUES ("李煜",3);

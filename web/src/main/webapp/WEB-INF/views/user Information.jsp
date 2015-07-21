@@ -25,6 +25,11 @@
        </li></ul>
 
 
+      <ul>
+        <li>用户管理页面</li>
+      </ul>
+
+
     <table border="1">
       <tr>
         <td>编号</td>
@@ -45,7 +50,7 @@
         <td>${user.sex}</td>
         <td>${user.age}</td>
         <td>${user.password}</td>
-        <td>${user.employeeId}</td>
+        <td>${user.employee.id}</td>
         <td><a href="./users/delete?id=${user.id}">删除用户</a></td>
         <td><a href="./users/modify?id=${user.id}">修改信息</a></td>
       </tr>

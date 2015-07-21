@@ -24,7 +24,6 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -52,14 +51,6 @@ public class Employee {
     }
 
 
-    public Employee(){
-
-    }
-//    public Employee(int id, String name, String role) {
-//        this.id = id;
-//        this.name = name;
-//        this.role = role;
-//    }
 
 
 //    @OneToMany(mappedBy="")　
@@ -73,4 +64,13 @@ public class Employee {
 //    {
 //        this.customers = customers;
 //    }
+
+
+    public Employee(){
+    }
+
+    public Employee( String name, String role) {
+        this.name = name;
+        this.role = role;
+    }
 }
