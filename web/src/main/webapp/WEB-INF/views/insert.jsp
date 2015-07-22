@@ -12,7 +12,7 @@
     <title></title>
 </head>
 <body>
-
+<h3>新用户注册</h3>
 
   <form action="/web/users/insert" method="post">
     用户名 :<input type = "text" name="name" value=""/>
@@ -20,7 +20,7 @@
     年龄 :<input type = "text" name="age" value=""/>
     密码 :<input type = "text" name="password" value=""/>
     <ul></ul>
-    工号 :<input type = "text" name="employeeId" value="">
+    工&nbsp;&nbsp;&nbsp;&nbsp;号 :<input type = "text" name="employeeId" value="">
     <%--姓名 :<input type = "text" name="employeeName" value="">--%>
     <%--岗位 :<input type = "text" name="employeeRole" value="">--%>
     </br>

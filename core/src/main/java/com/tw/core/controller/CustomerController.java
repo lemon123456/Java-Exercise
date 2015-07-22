@@ -35,12 +35,17 @@ public class CustomerController {
     public ModelAndView getCustomers(HttpSession session,HttpServletResponse response){
 
         if (session.getAttribute("user") != null) {
-            return new ModelAndView("customer","customerList",customerService.getCustomers());
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("customer");
+            modelAndView.addObject("customerList", customerService.getCustomers());
+            modelAndView.addObject("employeeList",employeeService.getEmployees());
+            return modelAndView;
         } else {
             CookieUtil.saveCookie("previousURL", "/customer", response);
             return new ModelAndView("redirect:"+"/login");
         }
     }
+
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public ModelAndView insertUser(@RequestParam(value = "customerName") String customerName,

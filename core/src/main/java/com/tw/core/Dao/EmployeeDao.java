@@ -62,7 +62,6 @@ public class EmployeeDao {
         session.close();
     }
 
-
     public static void main(String arg[]) throws SQLException{
         EmployeeDao employeeDao = new EmployeeDao();
         System.out.println(employeeDao.getOneEmployee(1).getId());

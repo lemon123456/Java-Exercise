@@ -52,43 +52,7 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "/insert", method = RequestMethod.GET)
-    public ModelAndView insertUser(HttpSession session,HttpServletResponse response) throws SQLException {
 
-        if (session.getAttribute("user") != null) {
-            return new ModelAndView("insert");
-        } else {
-            CookieUtil.saveCookie("previousURL", "/users/insert", response);
-            return new ModelAndView("redirect:"+"/login");
-        }
-    }
-
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public ModelAndView insertUser(@RequestParam(value = "name") String userName,
-                                   @RequestParam(value = "sex") String userSex,
-                                   @RequestParam(value = "age") int userAge,
-                                   @RequestParam(value = "password") String userPassword,
-                                   @RequestParam(value = "employeeId") int employeeId,
-                                   HttpSession session) throws SQLException {
-
-        if (session.getAttribute("user") != null) {
-
-            User user = new User();
-            user.setName(userName);
-            user.setSex(userSex);
-            user.setAge(userAge);
-            user.setPassword(userPassword);
-//            user.setEmployeeId(employeeId);
-            Employee employee = employeeService.getOneEmployee(employeeId);
-            user.setEmployee(employee);
-
-            userService.insertUsers(user);
-            return new ModelAndView("redirect:" + "/users");
-        } else {
-            return new ModelAndView("redirect:" + "/login");
-        }
-
-    }
 
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)

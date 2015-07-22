@@ -59,12 +59,19 @@
 
       <tr>
         <td><input type="text" name="name" value=""></td>
-        <td><input type="text" name="role" value=""></td>
+        <%--<td><input type="text" name="role" value=""></td>--%>
+        <td>
+          <select name="role">
+            <option value="OPs">OPs</option>
+            <option value="HR">HR</option>
+            <option value="COACH">COACH</option>
+          </select>
+        </td>
       </tr>
     </table>
 
     <input type="submit" value="提交"/>
-    <input type="reset" value="清除">
+    <input type="reset" value="清空">
   </form>
 </body>
 </html>

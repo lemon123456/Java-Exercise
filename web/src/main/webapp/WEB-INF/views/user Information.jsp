@@ -58,7 +58,7 @@
 
 
       <ul>
-        <li><a href="./users/insert">增加用户</a></li>
+        <li><a href="./users/insert">注册用户</a></li>
       </ul>
     </table>
 </body>

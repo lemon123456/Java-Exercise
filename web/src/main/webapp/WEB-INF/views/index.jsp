@@ -20,7 +20,7 @@
   <li><a href="/web/customer">顾客管理</a></li>
 
   <ul>
-    <li><a href="/web/login">登陆</a></li>
+    <li><a href="/web/login">登陆</a>/<a href="./users/insert">注册</a></li>
   </ul>
 </body>
 </html>

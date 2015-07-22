@@ -1,5 +1,6 @@
 package com.tw.core.Dao;
 
+import com.tw.core.entity.Employee;
 import com.tw.core.entity.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -32,6 +33,31 @@ public class UserDao {
     }
 
 
+    public boolean verifyRegister(User user) throws SQLException{
+
+        Session session = getSessionFactory().openSession();
+        session.beginTransaction();
+
+        Employee employee = user.getEmployee();
+
+        if (employee == null){
+            System.out.println("++++++++++++++++++++++++++该工号不存在++++++++++++++++++++");
+            return  false;
+        }else{
+
+            int coachId = employee.getId();
+            Query query = session.createQuery("SELECT count(*) FROM User user where user.employee.id = :coachId");
+            query.setParameter("coachId", coachId);
+            Long count = (Long)query.uniqueResult();
+
+            if (count != 0){
+                System.out.println("+++++++++++++++++++++++++++该工号已占用+++++++++++++++++++++");
+                return false;
+            }else{
+                return  true;
+            }
+        }
+    }
     public void insertUsers(User user) throws SQLException {
 
         Session session = getSessionFactory().openSession();
@@ -44,8 +70,8 @@ public class UserDao {
         user_insert.setAge(user.getAge());
         user_insert.setPassword(passwordEncryption.encodeByMD5(user.getPassword()));
         user_insert.setEmployee(user.getEmployee());
-
         session.save(user_insert);
+
         session.getTransaction().commit();
         session.close();
     }
@@ -121,7 +147,7 @@ public class UserDao {
 
     public static void main(String agrs[]) throws SQLException{
         UserDao userdao = new UserDao();
-        System.out.println(userdao.login("admin1","123"));
+        System.out.println(userdao.login("admin1", "123"));
     }
 
 

@@ -56,17 +56,23 @@
         <table border="1">
             <tr>
                 <td>姓名</td>
-                <td>教练ID</td>
+                <td>教练</td>
             </tr>
 
             <tr>
                 <td><input type="text" name="customerName" value=""></td>
-                <td><input type="text" name="coachId" value=""></td>
+                <td>
+                    <select name="coachId">
+                        <c:forEach items="${employeeList}" var="employee">
+                            <option value="${employee.id}">${employee.name}</option>
+                        </c:forEach>
+                    </select>
+                </td>
             </tr>
         </table>
 
         <input type="submit" value="提交"/>
-        <input type="reset" value="清除">
+        <input type="reset" value="清空">
     </form>
 
 

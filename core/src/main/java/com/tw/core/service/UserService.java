@@ -27,6 +27,16 @@ public class UserService {
         return null;
     }
 
+
+    public boolean verifyRegister(User user){
+        try{
+            return userDao.verifyRegister(user);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public void insertUsers(User user){
         try {
             userDao.insertUsers(user);

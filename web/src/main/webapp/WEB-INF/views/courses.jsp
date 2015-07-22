@@ -73,7 +73,7 @@
     </table>
 
     <input type="submit" value="提交"/>
-    <input type="reset" value="清除">
+    <input type="reset" value="清空">
   </form>
 
   <ul><li>预约私教课</li></ul>
@@ -94,7 +94,7 @@
     </table>
 
     <input type="submit" value="提交"/>
-    <input type="reset" value="清除">
+    <input type="reset" value="清空">
   </form>
 
 </body>
