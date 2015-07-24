@@ -1,18 +1,13 @@
 package com.tw.core.service;
 
 import com.tw.core.Dao.EmployeeDao;
-import com.tw.core.Dao.UserDao;
 import com.tw.core.entity.Employee;
-import com.tw.core.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Created by twer on 7/19/15.
- */
 
 @Service
 public class EmployeeService {

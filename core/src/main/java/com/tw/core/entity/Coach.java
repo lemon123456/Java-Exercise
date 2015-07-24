@@ -1,7 +1,11 @@
 package com.tw.core.entity;
 
-/**
- * Created by twer on 7/22/15.
- */
-public class Coach extends  {
+public class Coach extends Employee {
+    private int id;
+    private String name;
+    private String sex;
+    private int age;
+    private String email;
+    private String role;
+    private String state;
 }

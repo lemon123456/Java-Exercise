@@ -1,12 +1,8 @@
 package com.tw.core.controller;
 
 import com.tw.core.Util.CookieUtil;
-import com.tw.core.entity.Customer;
-import com.tw.core.entity.Employee;
-import com.tw.core.entity.User;
-import com.tw.core.service.CoachService;
-import com.tw.core.service.CustomerService;
-import com.tw.core.service.EmployeeService;
+import com.tw.core.entity.Course;
+import com.tw.core.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,26 +16,19 @@ import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 
 @Controller
-@RequestMapping("/customer")
-public class CustomerController {
-
+@RequestMapping("/course")
+public class CourseController {
     @Autowired
-    private CustomerService customerService;
+    private CourseService courseService;
 
-    @Autowired
-    private EmployeeService employeeService;
 
-    @Autowired
-    private CoachService coachService;
-
-    @RequestMapping(method =RequestMethod.GET)
-    public ModelAndView getCustomers(HttpSession session,HttpServletResponse response){
+    @RequestMapping(method = RequestMethod.GET)
+    public ModelAndView getCourses(HttpSession session,HttpServletResponse response){
 
         if (session.getAttribute("user") != null) {
             ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("customer");
-            modelAndView.addObject("customerList", customerService.getCustomers());
-            modelAndView.addObject("coachList",coachService.getCoaches());
+            modelAndView.setViewName("course");
+            modelAndView.addObject("courseList", courseService.getCourses());
             return modelAndView;
         } else {
             CookieUtil.saveCookie("previousURL", "/customer", response);
@@ -47,17 +36,17 @@ public class CustomerController {
         }
     }
 
-
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public ModelAndView insertUser(@RequestParam(value = "customerName") String customerName,
+    public ModelAndView insertUser(@RequestParam(value = "courseName") String courseName,
+                                   @RequestParam(value = "description") String description,
                                    HttpSession session) throws SQLException {
 
         if (session.getAttribute("user") != null) {
 
-            Customer customer = new Customer(customerName);
-            customerService.insertCustomer(customer);
+            Course course = new Course(courseName,description);
+            courseService.insertCourse(course);
 
-            return new ModelAndView("redirect:" + "/customer");
+            return new ModelAndView("redirect:" + "/course");
         } else {
             return new ModelAndView("redirect:" + "/login");
         }
@@ -66,8 +55,8 @@ public class CustomerController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public ModelAndView deleteCustomer(@PathVariable("id") String id,HttpSession session) throws SQLException {
         if (session.getAttribute("user") != null) {
-            customerService.deleteCustomer(Integer.parseInt(id));
-            return new ModelAndView("redirect:" + "/customer");
+            courseService.deleteCourse(Integer.parseInt(id));
+            return new ModelAndView("redirect:" + "/course");
         } else {
             return new ModelAndView("redirect:" + "/login");
         }
@@ -77,7 +66,7 @@ public class CustomerController {
     public ModelAndView getOneCustomer(@PathVariable("id") String id, HttpSession session) throws SQLException {
 
         if (session.getAttribute("user") != null) {
-            return new ModelAndView("modifyCustomer", "customer",customerService.getOneCustomer(Integer.parseInt(id)));
+            return new ModelAndView("modifyCourse", "course",courseService.getOneCourse(Integer.parseInt(id)));
         } else {
             return new ModelAndView("redirect:" + "/login");
         }
@@ -85,21 +74,19 @@ public class CustomerController {
 
     @RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
     public ModelAndView updateOneCustomer(@PathVariable("id") String id,
-                                          @RequestParam(value = "customerName") String customerName,
+                                          @RequestParam(value = "courseName") String courseName,
+                                          @RequestParam(value = "description") String description,
                                           HttpSession session) {
 
 
         if (session.getAttribute("user") != null) {
 
-            Customer customer = new Customer();
-            customer.setId(Integer.parseInt(id));
-            customer.setCustomerName(customerName);
-            customerService.UpdateOneCustomer(customer);
+            Course course = new Course(Integer.parseInt(id),courseName,description);
+            courseService.updateOneCourse(course);
 
-            return new ModelAndView("redirect:" + "/customer");
+            return new ModelAndView("redirect:" + "/course");
         } else {
             return new ModelAndView("redirect:" + "/login");
         }
     }
-
 }

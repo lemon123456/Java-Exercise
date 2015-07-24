@@ -11,12 +11,6 @@ import java.util.List;
 
 import static com.tw.core.Util.HibernateUtil.getSessionFactory;
 
-
-/**
- * Created by twer on 7/7/15.
- */
-
-
 @Repository
 public class UserDao {
 
@@ -66,8 +60,6 @@ public class UserDao {
         User user_insert = new User();
         user_insert.setId(user.getId());
         user_insert.setName(user.getName());
-        user_insert.setSex(user.getSex());
-        user_insert.setAge(user.getAge());
         user_insert.setPassword(passwordEncryption.encodeByMD5(user.getPassword()));
         user_insert.setEmployee(user.getEmployee());
         session.save(user_insert);
@@ -111,9 +103,7 @@ public class UserDao {
         User user_update = new User();
         user_update.setId(user.getId());
         user_update.setName(user.getName());
-        user_update.setSex(user.getSex());
-        user_update.setAge(user.getAge());
-        user_update.setPassword(user.getPassword());
+        user_update.setPassword(passwordEncryption.encodeByMD5(user.getPassword()));
         user_update.setEmployee(user.getEmployee());
 
         session.update(user_update);

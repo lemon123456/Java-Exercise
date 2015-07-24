@@ -1,7 +1,8 @@
 package com.tw.core.service;
 
-import com.tw.core.Dao.CustomerDao;
-import com.tw.core.entity.Customer;
+import com.tw.core.Dao.ScheduleDao;
+import com.tw.core.entity.Employee;
+import com.tw.core.entity.Schedule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,52 +10,52 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Service
-public class CustomerService {
+public class ScheduleService {
 
     @Autowired
-    private CustomerDao customerDao;
+    private ScheduleDao scheduleDao;
 
-    public List<Customer> getCustomers(){
+    public List<Schedule> getSchedules(){
         try {
-            return customerDao.getCustomers();
+            return scheduleDao.getSchedules();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-
-    public void insertCustomer(Customer customer){
+    public void deleteSchedule(int id){
         try {
-            customerDao.insertCustomer(customer);
+            scheduleDao.deleteSchedule(id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void deleteCustomer(int id){
+
+    public void insertSchedule(Schedule schedule){
         try {
-            customerDao.deleteCustomer(id);
+            scheduleDao.insertSchedule(schedule);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public Customer getOneCustomer(int id){
+
+    public Schedule getOneSchedule(int id){
         try{
-            return customerDao.getOneCustomer(id);
+            return scheduleDao.getOneSchedule(id);
         }catch (SQLException e){
             e.printStackTrace();
         }
         return null;
     }
 
-    public void UpdateOneCustomer(Customer customer){
+    public void updateOneSchedule(Schedule schedule){
         try{
-            customerDao.UpdateOneCustomer(customer);
+            scheduleDao.updateOneSchedule(schedule);
         }catch (SQLException e){
             e.printStackTrace();
         }
     }
-
 }

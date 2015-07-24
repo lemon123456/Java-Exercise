@@ -8,9 +8,6 @@ import org.springframework.stereotype.Service;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Created by twer on 7/8/15.
- */
 
 @Service
 public class UserService {
@@ -53,8 +50,6 @@ public class UserService {
         }
     }
 
-
-
     public User getOneUser(int id){
         try{
             return userDao.getOneUser(id);
@@ -81,12 +76,5 @@ public class UserService {
         return false;
     }
 
-//    public static void main(String arg[]){
-//        UserService userService = new UserService();
-//        try{
-//            System.out.println(userService.getUsers());
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//    }
+
 }

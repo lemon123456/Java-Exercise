@@ -11,9 +11,6 @@ import java.util.List;
 
 import static com.tw.core.Util.HibernateUtil.getSessionFactory;
 
-/**
- * Created by twer on 7/19/15.
- */
 
 @Repository
 public class EmployeeDao {
@@ -62,9 +59,10 @@ public class EmployeeDao {
         session.close();
     }
 
-    public static void main(String arg[]) throws SQLException{
-        EmployeeDao employeeDao = new EmployeeDao();
-        System.out.println(employeeDao.getOneEmployee(1).getId());
-    }
+//    public static void main(String arg[]) throws SQLException{
+//        EmployeeDao employeeDao = new EmployeeDao();
+//        Employee employee = new Employee("jame","male",11,"3","coach","YES");
+//        employeeDao.insertEmployee(employee);
+//    }
 
 }

@@ -1,14 +1,10 @@
 package com.tw.core.Util;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 
-/**
- * Created by twer on 7/10/15.
- */
 public class HibernateUtil {
 
     private static SessionFactory sessionFactory ;

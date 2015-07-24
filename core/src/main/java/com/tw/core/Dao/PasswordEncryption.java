@@ -4,9 +4,6 @@ import org.springframework.stereotype.Repository;
 
 import java.security.MessageDigest;
 
-/**
- * Created by twer on 7/14/15.
- */
 
 @Repository
 public class PasswordEncryption {

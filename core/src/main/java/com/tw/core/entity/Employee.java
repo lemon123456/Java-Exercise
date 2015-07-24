@@ -1,25 +1,18 @@
 package com.tw.core.entity;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 import javax.persistence.*;
-import javax.persistence.metamodel.ListAttribute;
-import java.util.HashSet;
-import java.util.Set;
 
-/**
- * Created by twer on 7/17/15.  name,role
- */
 
 @Entity
 @Table(name = "Employee")
 public class Employee {
     private int id;
     private String name;
+    private String sex;
+    private int age;
+    private String email;
     private String role;
-
-//    private Set<Customer> customers;
+    private String state;
 
 
     @Id
@@ -41,36 +34,69 @@ public class Employee {
         this.name = name;
     }
 
+    @Column(name = "sex")
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    @Column(name = "age")
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Column(name = "email")
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Column(name = "role")
     public String getRole() {
         return role;
     }
-
     public void setRole(String role) {
         this.role = role;
     }
 
-
-
-
-//    @OneToMany(mappedBy="")　
-//    @LazyCollection(LazyCollectionOption.EXTRA)
-//    Set<Customer> getCustomers()
-//    {
-//        return customers;
-//    }
-//
-//    public void setCustomers(Set<Customer> customers)
-//    {
-//        this.customers = customers;
-//    }
-
-
-    public Employee(){
+    @Column(name = "state")
+    public String getState() {
+        return state;
     }
 
-    public Employee( String name, String role) {
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public Employee() {
+    }
+
+    public Employee(String name, String sex, int age, String email, String role, String state) {
         this.name = name;
+        this.sex = sex;
+        this.age = age;
+        this.email = email;
         this.role = role;
+        this.state = state;
+    }
+
+    public Employee(int id, String name, String sex, int age, String email, String role, String state) {
+        this.id = id;
+        this.name = name;
+        this.sex = sex;
+        this.age = age;
+        this.email = email;
+        this.role = role;
+        this.state = state;
     }
 }

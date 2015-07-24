@@ -1,30 +1,23 @@
 
 package com.tw.core.controller;
 
-import com.mysql.jdbc.StringUtils;
 import com.tw.core.Util.CookieUtil;
 import com.tw.core.entity.Employee;
 import com.tw.core.entity.User;
-import com.tw.core.Dao.UserDao;
-
-import java.io.*;
-import java.net.CookieStore;
-import java.net.URLDecoder;
-import java.sql.SQLException;
-import java.util.*;
-
 import com.tw.core.service.EmployeeService;
 import com.tw.core.service.UserService;
-import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Controller
@@ -52,9 +45,6 @@ public class UserController {
     }
 
 
-
-
-
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public ModelAndView deleteUser(@RequestParam(value = "id") int id, HttpSession session) throws SQLException {
         if (session.getAttribute("user") != null) {
@@ -78,8 +68,6 @@ public class UserController {
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
     public ModelAndView updateOneUser(@RequestParam(value = "id") int userId,
                                       @RequestParam(value = "name") String userName,
-                                      @RequestParam(value = "sex") String userSex,
-                                      @RequestParam(value = "age") int userAge,
                                       @RequestParam(value = "password") String userPassword,
                                       @RequestParam(value = "employeeId") int employeeId,
                                       HttpSession session) {
@@ -87,10 +75,7 @@ public class UserController {
             User user = new User();
             user.setId(userId);
             user.setName(userName);
-            user.setSex(userSex);
-            user.setAge(userAge);
             user.setPassword(userPassword);
-//            user.setEmployeeId(employeeId);
             Employee employee = employeeService.getOneEmployee(employeeId);
             user.setEmployee(employee);
 

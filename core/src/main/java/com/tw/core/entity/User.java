@@ -9,33 +9,14 @@ import javax.persistence.*;
 @Table(name = "User")
 
 public class User {
-
-
     private int id;
     private String name;
-    private String sex;
-    private int age;
     private String password;
-//    private int employeeId;
-//    @OneToOne
-//    @JoinColumn(name="employeeId")
     private Employee employee;
 
-    public User(){
-
-    }
-
-    public User(String name, String sex, int age, String password,Employee employee) {
-        this.name = name;
-        this.sex = sex;
-        this.age = age;
-        this.password = password;
-//        this.employee = employee;
-    }
 
     @Id //@Id 注解声明了该实体Bean的标识属性
     @GeneratedValue(strategy = GenerationType.AUTO)  //@Id 注解可将实体Bean中某个属性定义为主键，使用@GenerateValue注解可以定义该标识符的生成策略。
-//    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -53,25 +34,6 @@ public class User {
         this.name = name;
     }
 
-    @Column(name = "sex")
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    @Column(name = "age")
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-
     @Column(name = "password")
     public String getPassword() {
         return password;
@@ -82,25 +44,11 @@ public class User {
     }
 
 
-//    @Column(name = "employeeId")
-//    public int getEmployeeId() {
-//        return employeeId;
-//    }
-//
-//    public void setEmployeeId(int employeeId) {
-//        this.employeeId = employeeId;
-//    }
-
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @OneToOne
-//    @JoinColumn(name="employeeId")
-
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="employeeId")
     public Employee getEmployee() {
         return employee;
     }
-//
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }

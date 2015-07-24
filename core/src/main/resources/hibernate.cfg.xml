@@ -33,7 +33,8 @@
         <mapping class="com.tw.core.entity.User"/>
         <mapping class="com.tw.core.entity.Employee"/>
         <mapping class="com.tw.core.entity.Customer"/>
-        <mapping class="com.tw.core.entity.Courses"/>
+        <mapping class="com.tw.core.entity.Course"/>
+        <mapping class="com.tw.core.entity.Schedule"/>
     </session-factory>
 
 </hibernate-configuration>

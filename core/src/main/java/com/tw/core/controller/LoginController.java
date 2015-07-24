@@ -14,9 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 
-/**
- * Created by twer on 7/18/15.
- */
 
 @Controller
 @RequestMapping("/login")
@@ -45,9 +42,7 @@ public class LoginController {
             session.setAttribute("user", name );
             String previousURL = CookieUtil.getCookie("previousURL", request);
             if (previousURL != null){
-
                 CookieUtil.deleteCookie(request,response);
-
                 return new ModelAndView("redirect:" + previousURL);
             }else{
                 return new ModelAndView("redirect:"+"/");
