@@ -6,15 +6,9 @@
 <head>
     <title>用户管理</title>
 
-    <link rel="stylesheet" href="./lib/css/bootstrap.css"  />
+    <link href="./lib/css/bootstrap.css" rel="stylesheet" type="text/css"/>
 
-    <style type="text/css">
-        h2 {
-            color: #428bca;
-            position:relative;
-            text-align: center;
-           }
-    </style>
+
 
 </head>
 <body>

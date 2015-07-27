@@ -1,9 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<link rel="stylesheet" href="./lib/css/customerStyle.css"/>
+
 <html>
 <head>
     <title>课程管理</title>
-    <link rel="stylesheet" href="./lib/css/customerStyle.css"/>
+    <script src="lib/js/jquery-1.11.1.min.js"></script>
+    <%--<spring:url value="./js/course.js" var="courseJs"/>--%>
+    <script src="./js/course.js"></script>
 </head>
 <body>
 
@@ -23,34 +28,48 @@
     <h2>课程管理页面</h2>
 </ul>
 
+<div class="updateCourseForm">
+    <form id="updateCourseForm" hidden>
+        编号 :<input type="text" id="idInput" name="id"  readonly="readonly"/>
+        课程 :<input type="text" id="nameInput" name="courseName" />
+        描述 :<input type="text" id="descriptionInput" name="description"/>
+        <input class="submitInput" id="submitInput" type="submit"
+               onclick="updateCourse();" value="更新"/>
+    </form>
+</div>
+
 <div class="container">
-    <table class="table table-bordered">
-        <tr>
+
+    <table id="courseTable" class="table table-bordered">
+        <tr id="navigatorOfCourseTable">
             <td>编号</td>
             <td>课程</td>
             <td>描述</td>
             <td>删除</td>
             <td>更新</td>
         </tr>
-
         <c:forEach items="${courseList}" var="course">
             <tr>
                 <td>${course.id}</td>
                 <td>${course.courseName}</td>
                 <td>${course.description}</td>
-                <td><a href="./course/delete/${course.id}">删除信息</a></td>
-                <td><a href="./course/modify/${course.id}">修改信息</a></td>
+                <td id="${course.id}">
+                    <button class="button deleteButton" type="button">删除</button>
+                </td>
+                <td>
+                    <button class="button updateButton" type="button"
+                            data-course-id="<c:out value="${course.id}"/>"
+                            data-course-name="<c:out value="${course.courseName}"/>"
+                            data-course-description="<c:out value="${course.description}"/>">更新
+                    </button>
+                </td>
             </tr>
         </c:forEach>
     </table>
 
-    <h3>
-        <ul>
-            <li>添加课程</li>
-        </ul>
-    </h3>
 
-    <form action="/web/course/insert" method="post">
+    <li id="insertButton">添加课程</li>
+    <form id="insertCourseForm" hidden>
         <table class="table table-bordered">
             <tr>
                 <td>课程</td>
@@ -58,15 +77,17 @@
             </tr>
 
             <tr>
-                <td><input type="text" name="courseName" value=""></td>
+                <td><input type="text" name="courseName" id="nameInsert" value=""></td>
                 <td><input type="text" name="description" value=""></td>
             </tr>
         </table>
-
-        <input type="submit" value="提交"/>
-        <input type="reset" value="清空">
+        <button class="button insertButton" type="button"
+                onclick="insertCourse();">提交
+        </button>
+        <button class="button resetButton" type="reset">清空</button>
     </form>
 </div>
+
 
 </body>
 </html>

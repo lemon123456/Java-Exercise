@@ -1,9 +1,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<link href="./lib/css/customerStyle.css" rel="stylesheet" type="text/css"/>
+
 <html>
 <head>
     <title>课程表管理</title>
-    <link rel="stylesheet" href="./lib/css/customerStyle.css"/>
+    <title></title>
+    <spring:url value="/lib/js/jquery-1.11.1.min.js" var="jquery"/>
+    <script src="${jquery}"></script>
+    <spring:url value="./js/scedule.js" var="scheduleJs"/>
+    <script src="${scheduleJs}"></script>
+
 </head>
 <body>
 

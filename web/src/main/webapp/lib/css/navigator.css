@@ -1,0 +1,28 @@
+ul {
+    display: inline-block;
+    float: left;
+    width: 100%;
+    padding: 0;
+    margin: auto 200px;
+    list-style-type: none;
+    text-align: center;
+}
+
+a {
+    float: left;
+    position: relative;
+    width: 7em;
+    text-decoration: none;
+    color: white;
+    background-color: purple;
+    padding: 0.2em 0.6em;
+    border-right: 1px solid white;
+}
+
+a:hover {
+    background-color: #ff3300
+}
+
+li {
+    display: inline
+}

@@ -10,6 +10,13 @@ html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
+
+h2 {
+  color: #428bca;
+  position:relative;
+  text-align: center;
+}
+
 body {
   margin: 0;
 }
