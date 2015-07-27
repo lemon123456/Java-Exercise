@@ -58,9 +58,7 @@ public class CourseController {
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public
-    @ResponseBody
-    void deleteCourse(@PathVariable int id) {
+    public @ResponseBody void deleteCourse(@PathVariable int id) {
         courseService.deleteCourse(id);
     }
 
@@ -85,21 +83,21 @@ public class CourseController {
 //        }
 //    }
 
-    @RequestMapping(value = "{id}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public void updateOneCourse(@PathVariable("id") String id,
+    @RequestMapping(method = RequestMethod.PUT)
+    public void updateOneCourse(@RequestParam(value = "id") int id,
                                 @RequestParam(value = "courseName") String courseName,
                                 @RequestParam(value = "description") String description,
                                 HttpServletResponse response) {
 
-        Course course = new Course(Integer.parseInt(id), courseName, description);
+        Course course = new Course(id,courseName, description);
         courseService.updateOneCourse(course);
-        course = courseService.getOneCourse(Integer.parseInt(id));
+        course = courseService.getOneCourse(id);
 
         try{
             JSONObject courseJson = new JSONObject("{'id':'"+course.getId()+
                     "','courseName':'" + course.getCourseName() +
-                    "','description':'" + course.getDescription());
+                    "','description':'" + course.getDescription()+"'}");
             response.setContentType("text/html;charset=utf-8");
             response.getWriter().write(courseJson.toString());
         }catch (JSONException e){

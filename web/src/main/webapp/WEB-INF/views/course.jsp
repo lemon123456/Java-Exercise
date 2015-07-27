@@ -1,14 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<link rel="stylesheet" href="./lib/css/customerStyle.css"/>
 
 <html>
 <head>
     <title>课程管理</title>
-    <script src="lib/js/jquery-1.11.1.min.js"></script>
-    <%--<spring:url value="./js/course.js" var="courseJs"/>--%>
-    <script src="./js/course.js"></script>
+    <link rel="stylesheet" href="./lib/css/customerStyle.css"/>
+
 </head>
 <body>
 
@@ -33,8 +31,9 @@
         编号 :<input type="text" id="idInput" name="id"  readonly="readonly"/>
         课程 :<input type="text" id="nameInput" name="courseName" />
         描述 :<input type="text" id="descriptionInput" name="description"/>
-        <input class="submitInput" id="submitInput" type="submit"
-               onclick="updateCourse();" value="更新"/>
+        <%--<input class="submitInput" id="submitInput" type="submit"--%>
+               <%--onclick="updateCourse();" value="更新"/>--%>
+        <input class="submitInput" id="submitInput" type="submit"/>
     </form>
 </div>
 
@@ -88,6 +87,9 @@
     </form>
 </div>
 
+<script src="lib/js/jquery-1.11.1.min.js"></script>
+<%--<spring:url value="./js/course.js" var="courseJs"/>--%>
+<script src="./js/course.js"></script>
 
 </body>
 </html>
