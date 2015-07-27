@@ -1,8 +1,9 @@
 package com.tw.core.controller;
 
-import com.tw.core.Util.CookieUtil;
 import com.tw.core.entity.Course;
 import com.tw.core.service.CourseService;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.sql.SQLException;
 
 @Controller
@@ -56,9 +57,10 @@ public class CourseController {
 //    }
 
 
-
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public @ResponseBody void deleteCourse(@PathVariable int id) {
+    public
+    @ResponseBody
+    void deleteCourse(@PathVariable int id) {
         courseService.deleteCourse(id);
     }
 
@@ -87,9 +89,23 @@ public class CourseController {
     @ResponseStatus(HttpStatus.OK)
     public void updateOneCourse(@PathVariable("id") String id,
                                 @RequestParam(value = "courseName") String courseName,
-                                @RequestParam(value = "description") String description) {
+                                @RequestParam(value = "description") String description,
+                                HttpServletResponse response) {
 
-            Course course = new Course(Integer.parseInt(id), courseName, description);
-            courseService.updateOneCourse(course);
+        Course course = new Course(Integer.parseInt(id), courseName, description);
+        courseService.updateOneCourse(course);
+        course = courseService.getOneCourse(Integer.parseInt(id));
+
+        try{
+            JSONObject courseJson = new JSONObject("{'id':'"+course.getId()+
+                    "','courseName':'" + course.getCourseName() +
+                    "','description':'" + course.getDescription());
+            response.setContentType("text/html;charset=utf-8");
+            response.getWriter().write(courseJson.toString());
+        }catch (JSONException e){
+            e.printStackTrace();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }

@@ -49,22 +49,25 @@ function updateCourse(){
         return false;
     }
 
-    console.log(name);
     var form = $('#updateCourseForm');
     var id = $('#idInput').val();
-    form.submit(function () {
+    form.submit(function (e) {
+        e.preventDefault();
         $.ajax({
             url: '/web/course/' + id,
             type:'PUT',
             dataType: 'text',
             data: form.serialize(),
-            success: function(){
+            success: function(result){
                 alert("更新成功");
-                window.location = "http://localhost:8080/web/course"
+                var tr = '#tr'+result.id;
+                $(tr).empty();
+                $(tr).append(result.courseName);
+                $(tr).append(result.description);
             },
             error: function(){
                 alert("更新失败");
-                window.location = "http://localhost:8080/web/course"
+                return;
             }
         });
     })
@@ -85,14 +88,3 @@ $(function () {
     });
 });
 
-
-function getCourses() {
-    $.ajax({
-        url: '/web/course',
-        type: 'GET',
-        dataType: 'text',
-        success: function () {
-            window.location = "http://localhost:8080/web/course"
-        }
-    })
-}
