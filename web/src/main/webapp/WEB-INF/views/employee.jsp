@@ -4,7 +4,7 @@
 <head>
     <title>员工管理</title>
 
-    <link rel="stylesheet" href="./lib/css/employeeStyle.css"/>
+    <link rel="stylesheet" href="css/employeeStyle.css"/>
 </head>
 <body>
 

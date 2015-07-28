@@ -1,0 +1,65 @@
+html {
+    font-family: cursive; /*更改页面上的所有字体*/
+}
+
+h2 {
+    color: #CA42C8;
+    text-align: center;
+}
+
+a {
+    color: #CA42C8;
+}
+
+a:hover {
+    background-color: #ff3300;
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 1170px;
+}
+
+.table {
+    border-collapse: collapse;
+    width: inherit;
+    margin-top: 20px; /*table间的间距*/
+    font-size: 18px;
+    text-align: center; /*表格字体居中*/
+    border: 1px solid gold;
+    background-color: antiquewhite;
+    height: 35px;
+    color: peru;
+}
+
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #ddd;
+}
+
+input {
+    line-height: inherit;
+    margin: 0;
+    font: inherit;
+    font-size: medium;
+    color: inherit;
+}
+
+/*input[type="reset"], input[type="submit"] {*/
+/*-webkit-appearance: button;*/
+/*cursor: pointer;*/
+/*}*/
+
+.button {
+    box-sizing: border-box;
+    font-size: small;
+    cursor: pointer;
+}
+
+#insertButton {
+    margin-top: 20px;
+    font-size: large;
+}

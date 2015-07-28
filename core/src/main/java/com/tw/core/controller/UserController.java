@@ -36,7 +36,7 @@ public class UserController {
     public ModelAndView getUsers(HttpSession session,HttpServletResponse response) {
 
         if (session.getAttribute("user") != null) {
-            return new ModelAndView("user Information","userList",userService.getUsers());
+            return new ModelAndView("userInformation","userList",userService.getUsers());
         } else {
             CookieUtil.saveCookie("previousURL", "/users", response);
             return new ModelAndView("redirect:"+"/login");

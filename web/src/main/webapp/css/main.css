@@ -1,0 +1,12 @@
+.navigation {
+    margin: 1em;
+}
+
+.nav-item {
+    display: inline-block;
+    margin: auto 10px;
+}
+
+.register {
+    margin: 10px 0;
+}

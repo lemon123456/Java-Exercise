@@ -5,7 +5,7 @@
 <head>
     <title>顾客管理</title>
 
-    <link rel="stylesheet" href="./lib/css/customerStyle.css"/>
+    <link rel="stylesheet" href="css/customerStyle.css"/>
 </head>
 <body>
 

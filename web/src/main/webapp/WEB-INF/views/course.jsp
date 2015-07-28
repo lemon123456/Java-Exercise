@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>课程管理</title>
-    <link rel="stylesheet" href="./lib/css/customerStyle.css"/>
+    <link rel="stylesheet" href="css/customerStyle.css"/>
 
 </head>
 <body>
@@ -26,7 +26,7 @@
     <h2>课程管理页面</h2>
 </ul>
 
-<div class="updateCourseForm">
+<div class="container updateCourseForm">
     <form id="updateCourseForm" hidden>
         编号 :<input type="text" id="idInput" readonly="readonly"/>
         课程 :<input type="text" id="nameInput" />
@@ -47,18 +47,14 @@
         </tr>
         <c:forEach items="${courseList}" var="course">
             <tr>
-                <td>${course.id}</td>
-                <td>${course.courseName}</td>
-                <td>${course.description}</td>
+                <td class="course-id">${course.id}</td>
+                <td class="course-name">${course.courseName}</td>
+                <td class="course-description">${course.description}</td>
                 <td id="${course.id}">
-                    <button class="button deleteButton" type="button">删除</button>
+                    <button class="button deleteButton">删除</button>
                 </td>
                 <td>
-                    <button class="button updateButton" type="button"
-                            data-course-id="<c:out value="${course.id}"/>"
-                            data-course-name="<c:out value="${course.courseName}"/>"
-                            data-course-description="<c:out value="${course.description}"/>">更新
-                    </button>
+                    <button class="button updateButton">更新</button>
                 </td>
             </tr>
         </c:forEach>
@@ -67,7 +63,7 @@
 
     <li id="insertButton">添加课程</li>
     <form id="insertCourseForm" hidden>
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="insertTable">
             <tr>
                 <td>课程</td>
                 <td>描述</td>

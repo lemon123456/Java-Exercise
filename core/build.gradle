@@ -9,8 +9,6 @@ buildscript {
     dependencies {
         classpath 'org.flywaydb:flyway-gradle-plugin:3.2.1'
         classpath 'org.codehaus.jackson:jackson-mapper-asl:1.9.10'
-
-
     }
 }
 

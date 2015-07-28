@@ -42,11 +42,14 @@ public class CourseController {
 //    }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void insertCourse(@RequestParam(value = "courseName") String courseName,
+    public @ResponseBody Course insertCourse(@RequestParam(value = "courseName") String courseName,
                              @RequestParam(value = "description") String description) throws SQLException {
+
+        System.out.println("#################");
 
         Course course = new Course(courseName, description);
         courseService.insertCourse(course);
+        return course;
     }
 
 //    @RequestMapping(value = "/insert", method = RequestMethod.POST)
@@ -67,7 +70,9 @@ public class CourseController {
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public @ResponseBody void deleteCourse(@PathVariable int id) {
+    public
+    @ResponseBody
+    void deleteCourse(@PathVariable int id) {
 
         courseService.deleteCourse(id);
     }
@@ -93,28 +98,25 @@ public class CourseController {
 //        }
 //    }
 
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
-    public void updateOneCourse(
-                                @RequestParam(value = "courseName") String courseName,
-                                @RequestParam(value = "description") String description,
-                                HttpServletResponse response, @PathVariable("id") String id) {
+
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    public @ResponseBody Course updateOneCourse(@RequestParam(value = "id") int id,
+                                                @RequestParam(value = "courseName") String courseName,
+                                                @RequestParam(value = "description") String description) {
 
         System.out.println("###########");
-        Course course = new Course(Integer.parseInt(id),courseName, description);
+        Course course = new Course(id, courseName, description);
         courseService.updateOneCourse(course);
-        course = courseService.getOneCourse(Integer.parseInt(id));
+        System.out.println(course.getId());
+        System.out.println(course.getCourseName());
+        System.out.println(course.getDescription());
+//        course = courseService.getOneCourse(id);
 
-        try{
-            JSONObject courseJson = new JSONObject("{'id':'"+course.getId()+
-                    "','courseName':'" + course.getCourseName() +
-                    "','description':'" + course.getDescription()+"'}");
-            response.setContentType("text/html;charset=utf-8");
-            response.getWriter().write(courseJson.toString());
-        }catch (JSONException e){
-            e.printStackTrace();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+//            JSONObject courseJson = new JSONObject("{'id':'"+course.getId()+
+//                    "','courseName':'" + course.getCourseName() +
+//                    "','description':'" + course.getDescription()+"'}");
+//            response.setContentType("text/html;charset=utf-8");
+//            response.getWriter().write(courseJson.toString());
+        return course;
     }
 }
