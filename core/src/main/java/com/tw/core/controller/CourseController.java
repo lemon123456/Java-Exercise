@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/course")
@@ -31,6 +32,14 @@ public class CourseController {
 
     }
 
+//
+//    @RequestMapping(method = RequestMethod.GET)
+//    public @ResponseBody List<Course> getCourses() {
+//
+//        List<Course> courseList = courseService.getCourses();
+//        return courseList;
+//
+//    }
 
     @RequestMapping(method = RequestMethod.POST)
     public void insertCourse(@RequestParam(value = "courseName") String courseName,
@@ -59,6 +68,7 @@ public class CourseController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public @ResponseBody void deleteCourse(@PathVariable int id) {
+
         courseService.deleteCourse(id);
     }
 
@@ -84,15 +94,16 @@ public class CourseController {
 //    }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(method = RequestMethod.PUT)
-    public void updateOneCourse(@RequestParam(value = "id") int id,
+    @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
+    public void updateOneCourse(
                                 @RequestParam(value = "courseName") String courseName,
                                 @RequestParam(value = "description") String description,
-                                HttpServletResponse response) {
+                                HttpServletResponse response, @PathVariable("id") String id) {
 
-        Course course = new Course(id,courseName, description);
+        System.out.println("###########");
+        Course course = new Course(Integer.parseInt(id),courseName, description);
         courseService.updateOneCourse(course);
-        course = courseService.getOneCourse(id);
+        course = courseService.getOneCourse(Integer.parseInt(id));
 
         try{
             JSONObject courseJson = new JSONObject("{'id':'"+course.getId()+

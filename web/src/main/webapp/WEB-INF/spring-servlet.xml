@@ -13,6 +13,7 @@
     <mvc:default-servlet-handler />
     <mvc:resources mapping="/lib/**" location="/lib/" />
     <mvc:resources mapping="/js/**" location="/js/" />
+    <!--<mvc:resources mapping="/views/**" location="/views"/>-->
 
 
 

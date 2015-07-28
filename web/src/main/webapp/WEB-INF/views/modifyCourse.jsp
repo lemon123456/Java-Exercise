@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<form action="/web/course/modify/${course.id}" method="post">
+<form action="/web/course/modify" method="post">
     <tr>
         编号 :<input type="text" name="id" value="${course.id}" readonly="readonly"/>
         课程 :<input type="text" name="courseName" value="${course.courseName}"/>

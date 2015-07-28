@@ -74,10 +74,10 @@ input
     color: inherit;
 }
 
-input[type="reset"], input[type="submit"] {
-    -webkit-appearance: button;
-    cursor: pointer;
-}
+/*input[type="reset"], input[type="submit"] {*/
+    /*-webkit-appearance: button;*/
+    /*cursor: pointer;*/
+/*}*/
 
 .button{
     box-sizing: border-box;

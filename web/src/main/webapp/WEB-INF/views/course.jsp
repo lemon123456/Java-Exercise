@@ -28,11 +28,9 @@
 
 <div class="updateCourseForm">
     <form id="updateCourseForm" hidden>
-        编号 :<input type="text" id="idInput" name="id"  readonly="readonly"/>
-        课程 :<input type="text" id="nameInput" name="courseName" />
-        描述 :<input type="text" id="descriptionInput" name="description"/>
-        <%--<input class="submitInput" id="submitInput" type="submit"--%>
-               <%--onclick="updateCourse();" value="更新"/>--%>
+        编号 :<input type="text" id="idInput" readonly="readonly"/>
+        课程 :<input type="text" id="nameInput" />
+        描述 :<input type="text" id="descriptionInput"/>
         <input class="submitInput" id="submitInput" type="submit"/>
     </form>
 </div>
@@ -80,15 +78,13 @@
                 <td><input type="text" name="description" value=""></td>
             </tr>
         </table>
-        <button class="button insertButton" type="button"
-                onclick="insertCourse();">提交
+        <button class="button insertButton" type="button">提交
         </button>
         <button class="button resetButton" type="reset">清空</button>
     </form>
 </div>
 
 <script src="lib/js/jquery-1.11.1.min.js"></script>
-<%--<spring:url value="./js/course.js" var="courseJs"/>--%>
 <script src="./js/course.js"></script>
 
 </body>
