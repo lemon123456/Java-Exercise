@@ -38,13 +38,12 @@ $(function () {
             alert("Name can not be set null!");
             return false;
         }
-        var id = $('#idInput').val();
-        var description = $('#descriptionInput').val();
+        var form = $('#updateCourseForm');
         $.ajax({
             url: '/web/course/update',
             type: 'PUT',
             dataType: 'json',
-            data: {"id": id, "courseName": name, "description": description},
+            data: form.serialize(),
             success: function (result) {
                 $('#updateCourseForm').hide();
                 var td = 'tr #' + result.id;

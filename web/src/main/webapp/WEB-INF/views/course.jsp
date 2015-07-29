@@ -24,9 +24,9 @@
 
 <div class="container updateCourseForm">
     <form id="updateCourseForm" hidden>
-        编号 :<input type="text" id="idInput" readonly="readonly"/>
-        课程 :<input type="text" id="nameInput" />
-        描述 :<input type="text" id="descriptionInput"/>
+        编号 :<input type="text" id="idInput" name="id" readonly="readonly"/>
+        课程 :<input type="text" id="nameInput" name="courseName" />
+        描述 :<input type="text" id="descriptionInput" name="description"/>
         <input class="submitInput" id="submitInput" type="submit"/>
     </form>
 </div>
