@@ -17,10 +17,13 @@ public class CourseDao {
 
         Session session = getSessionFactory().openSession();
         session.beginTransaction();
+
         Query query = session.createQuery("from Course"); //此处User是类名，而不是数据库的表名,select * 不写
         List<Course> courseList = query.list();
+
         session.getTransaction().commit();
         session.close();
+
         return courseList;
     }
 
@@ -29,7 +32,9 @@ public class CourseDao {
 
         Session session = getSessionFactory().openSession();
         session.beginTransaction();
+
         session.save(course);
+
         session.getTransaction().commit();
         session.close();
     }
@@ -44,8 +49,8 @@ public class CourseDao {
         Course course = new Course();
         course.setId(id);
         session.delete(course);
-        session.getTransaction().commit();
 
+        session.getTransaction().commit();
         session.close();
     }
 
@@ -70,9 +75,4 @@ public class CourseDao {
         session.close();
     }
 
-
-    public static void main()throws SQLException{
-        CourseDao courseDao = new CourseDao();
-        System.out.println(courseDao.getCourses());
-    }
 }

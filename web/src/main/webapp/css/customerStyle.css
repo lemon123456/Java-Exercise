@@ -58,3 +58,12 @@ input {
     margin-top: 20px;
     font-size: large;
 }
+
+.navigation {
+    margin: 1em;
+}
+
+.nav-item {
+    display: inline-block;
+    margin: auto 10px;
+}

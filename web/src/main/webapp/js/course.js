@@ -4,7 +4,6 @@ $(function () {
         $('#insertCourseForm').toggle();
     });
 
-
     $('.updateButton').on('click', function () {
         var id = $(this).closest('tr').children('.course-id').text();
         var name = $(this).closest('tr').children('.course-name').text();
@@ -52,7 +51,6 @@ $(function () {
             }
         });
     });
-
 
     $('.insertButton').on('click', function () {
         course = this;

@@ -1,0 +1,31 @@
+<div class="container">
+    <h2>用户管理页面</h2>
+    <div class="register">
+        <a href="#/user/insert">注册用户</a>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <td>编号</td>
+            <td>用户名</td>
+            <td>工号</td>
+            <td>删除用户</td>
+            <td>修改信息</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in userList">
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.employee.id}}</td>
+            <td><a href="#/user/delete?{{user.id}}">删除用户</a></td>
+            <td><a href="#/user/modify?{{user.id}}">修改信息</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+

@@ -2,18 +2,10 @@ package com.tw.core.controller;
 
 import com.tw.core.entity.Course;
 import com.tw.core.service.CourseService;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
 
 @Controller
 @RequestMapping("/course")
@@ -21,10 +13,8 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
-
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getCourses() {
-
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("course");
         modelAndView.addObject("courseList", courseService.getCourses());
@@ -43,10 +33,8 @@ public class CourseController {
 
     @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody Course insertCourse(@RequestParam(value = "courseName") String courseName,
-                             @RequestParam(value = "description") String description) throws SQLException {
-
-        System.out.println("#################");
-
+                             @RequestParam(value = "description") String description) {
+//        System.out.println("#################");
         Course course = new Course(courseName, description);
         courseService.insertCourse(course);
         return course;
@@ -73,7 +61,6 @@ public class CourseController {
     public
     @ResponseBody
     void deleteCourse(@PathVariable int id) {
-
         courseService.deleteCourse(id);
     }
 
@@ -104,12 +91,12 @@ public class CourseController {
                                                 @RequestParam(value = "courseName") String courseName,
                                                 @RequestParam(value = "description") String description) {
 
-        System.out.println("###########");
+//        System.out.println("###########");
         Course course = new Course(id, courseName, description);
         courseService.updateOneCourse(course);
-        System.out.println(course.getId());
-        System.out.println(course.getCourseName());
-        System.out.println(course.getDescription());
+//        System.out.println(course.getId());
+//        System.out.println(course.getCourseName());
+//        System.out.println(course.getDescription());
 //        course = courseService.getOneCourse(id);
 
 //            JSONObject courseJson = new JSONObject("{'id':'"+course.getId()+
