@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>用户管理</title>
-    <link href="./lib/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="./lib/css/bootstrap.css"/>
     <link rel="stylesheet" href="css/main.css"/>
 </head>
 <body>

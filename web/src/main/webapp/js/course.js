@@ -4,34 +4,19 @@ $(function () {
         $('#insertCourseForm').toggle();
     });
 
-    //$('.deleteButton').on('click',function(){
-    //    if (confirm("确定要删除吗？")) {
-    //        course = this;
-    //        var id = course.closest('td').id;
-    //        $.ajax({
-    //            url: '/web/course/' + id,
-    //            type: 'DELETE',
-    //            dataType: 'text',
-    //            success: function () {
-    //                course.closest('tr').remove();
-    //            }
-    //        })
-    //    }
-    //});
 
-    //$('.updateButton').on('click', function () {
-    //    var id = $(this).closest('tr').children('.course-id').text();
-    //    var name = $(this).closest('tr').children('.course-name').text();
-    //    var description = $(this).closest('tr').children('.course-description').text();
-    //
-    //    $('#idInput').val(id);
-    //    $('#nameInput').val(name);
-    //    $('#descriptionInput').val(description);
-    //    $('#updateCourseForm').toggle();
-    //});
+    $('.updateButton').on('click', function () {
+        var id = $(this).closest('tr').children('.course-id').text();
+        var name = $(this).closest('tr').children('.course-name').text();
+        var description = $(this).closest('tr').children('.course-description').text();
+        $('#idInput').val(id);
+        $('#nameInput').val(name);
+        $('#descriptionInput').val(description);
+        $('#updateCourseForm').toggle();
+    });
 
     var course;
-    $('#courseTable').on('click', '.deleteButton', function () {
+    $('.deleteButton').on('click',function(){
         if (confirm("确定要删除吗？")) {
             course = this;
             var id = course.closest('td').id;
@@ -45,18 +30,6 @@ $(function () {
             })
         }
     });
-
-    $('#courseTable').on('click', '.updateButton', function () {
-        var id = $(this).closest('tr').children('.course-id').text();
-        var name = $(this).closest('tr').children('.course-name').text();
-        var description = $(this).closest('tr').children('.course-description').text();
-
-        $('#idInput').val(id);
-        $('#nameInput').val(name);
-        $('#descriptionInput').val(description);
-        $('#updateCourseForm').toggle();
-    });
-
 
     $('#updateCourseForm').submit(function (e) {
         e.preventDefault();
@@ -96,14 +69,7 @@ $(function () {
             dataType: 'json',
             data: form.serialize(),
             success: function (data) {
-                $('#insertCourseForm').hide();
-                $("#courseTable").append("<tr>" +
-                "<td class='course-id'>" + data.id + "</td>" +
-                "<td class='course-name'>" + data.courseName + "</td>" +
-                "<td class='course-description'>" + data.description + "</td>" +
-                "<td id=" + data.id + "><button class='button deleteButton'>删除</button></td>" +
-                "<td><button class='button updateButton'>更新</button></td>" + "</tr>");
-                //window.location.reload();
+                window.location.reload();
             }
         })
     })

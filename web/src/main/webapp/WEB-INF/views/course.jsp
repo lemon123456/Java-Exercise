@@ -10,21 +10,17 @@
 </head>
 <body>
 
-<ul>
-    <li>
-        <td><a href="/web/">&nbsp;&nbsp;首页&nbsp;&nbsp;</a></td>
-        <td><a href="/web/users">&nbsp;&nbsp;用户管理&nbsp;&nbsp;</a></td>
-        <td><a href="/web/employee">&nbsp;&nbsp;员工管理&nbsp;&nbsp;</a></td>
-        <td><a href="/web/course">&nbsp;&nbsp;课程管理&nbsp;&nbsp;</a></td>
-        <td><a href="/web/customer">&nbsp;&nbsp;顾客管理&nbsp;&nbsp;</a></td>
-        <td><a href="/web/schedule">&nbsp;&nbsp;课表管理&nbsp;&nbsp;</a></td>
-        <td><a href="/web/login/logout">&nbsp;&nbsp;logout&nbsp;&nbsp;</a></td>
-    </li>
+<ul class="navigation">
+    <li class="nav-item"><a href="/web/">首页</a></li>
+    <li class="nav-item"><a href="/web/users">用户管理</a></li>
+    <li class="nav-item"><a href="/web/employee">员工管理</a></li>
+    <li class="nav-item"><a href="/web/course">课程管理</a></li>
+    <li class="nav-item"><a href="/web/customer">顾客管理</a></li>
+    <li class="nav-item"><a href="/web/schedule">课表管理</a></li>
+    <li class="nav-item"><a href="/web/login/logout">logout</a></li>
 </ul>
 
-<ul>
-    <h2>课程管理页面</h2>
-</ul>
+<h2>课程管理页面</h2>
 
 <div class="container updateCourseForm">
     <form id="updateCourseForm" hidden>
@@ -36,7 +32,6 @@
 </div>
 
 <div class="container">
-
     <table id="courseTable" class="table table-bordered">
         <tr id="navigatorOfCourseTable">
             <td>编号</td>
@@ -60,7 +55,6 @@
         </c:forEach>
     </table>
 
-
     <li id="insertButton">添加课程</li>
     <form id="insertCourseForm" hidden>
         <table class="table table-bordered" id="insertTable">
@@ -68,7 +62,6 @@
                 <td>课程</td>
                 <td>描述</td>
             </tr>
-
             <tr>
                 <td><input type="text" name="courseName" id="nameInsert" value=""></td>
                 <td><input type="text" name="description" value=""></td>
@@ -78,6 +71,7 @@
         </button>
         <button class="button resetButton" type="reset">清空</button>
     </form>
+
 </div>
 
 <script src="lib/js/jquery-1.11.1.min.js"></script>
