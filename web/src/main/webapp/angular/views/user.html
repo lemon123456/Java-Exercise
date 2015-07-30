@@ -1,28 +1,58 @@
 <div class="container">
     <h2>用户管理页面</h2>
-    <div class="register">
-        <a href="#/user/insert">注册用户</a>
-    </div>
     <table class="table table-bordered">
         <thead>
         <tr>
             <td>编号</td>
             <td>用户名</td>
+            <td>密码</td>
             <td>工号</td>
             <td>删除用户</td>
             <td>修改信息</td>
         </tr>
         </thead>
         <tbody>
+        <tr>
         <tr ng-repeat="user in userList">
-            <td>{{user.id}}</td>
-            <td>{{user.name}}</td>
-            <td>{{user.employee.id}}</td>
-            <td><a href="#/user/delete?{{user.id}}">删除用户</a></td>
-            <td><a href="#/user/modify?{{user.id}}">修改信息</a></td>
+            <td>
+                <div ng-hide="hide[$index]">{{user.id}}</div>
+                <div ng-show="hide[$index]"><input type="text" ng-model="user.id" readonly="readonly"></div>
+            </td>
+            <td>
+                <div ng-hide="hide[$index]">{{user.name}}</div>
+                <div ng-show="hide[$index]"><input type="text" ng-model="user.name"></div>
+            </td>
+            <td>
+                <div ng-hide="hide[$index]">{{user.password}}</div>
+                <div ng-show="hide[$index]"><input type="password" ng-model="user.password"></div>
+            </td>
+            <td>
+                <div ng-hide="hide[$index]">{{user.employee.id}}</div>
+                <div ng-show="hide[$index]"><input type="text" ng-model="user.employee.id" readonly="readonly"></div>
+            </td>
+            <td>
+                <button ng-click="delete($index,user.id)">删除用户</button>
+            </td>
+            <td>
+                <button ng-hide="hide[$index]" ng-click="modify($index)">修改信息</button>
+                <button ng-show="hide[$index]" ng-click="update($index,$this)">更新信息</button>
+            </td>
         </tr>
+        <tr>
         </tbody>
     </table>
+
+
+    <form ng-submit="add($event)">
+        用户名 :<input type="text" name="name" ng-model="name"/></br>
+        密码 :<input type="password" name="password" ng-model="password"/></br>
+        工号 :<input type="text" name="employeeId" ng-model="employeeId"/></br>
+        <ul></ul>
+        <input type="submit" value="提交"/>
+        <input type="reset" value="清空"/>
+    </form>
+
+
 </div>
 
 

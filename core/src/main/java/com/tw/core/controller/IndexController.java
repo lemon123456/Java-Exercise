@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/")
 public class IndexController {
 
+//    response.setContentType("text/html;charset=utf-8");
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getIndex(){
         return new ModelAndView("index");

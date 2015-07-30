@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title></title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/customerStyle.css"/>
+</head>
+
+<body ng-app="gymApp">
+
+<div class="navigation">
+    <ul>
+        <li class="nav-item"><a href="#/users">用户管理</a></li>
+        <li class="nav-item"><a href="#/employee">员工管理</a></li>
+        <li class="nav-item"><a href="#/course">课程管理</a></li>
+        <li class="nav-item"><a href="#/customer">顾客管理</a></li>
+        <li class="nav-item"><a href="#/schedule">课表管理</a></li>
+        <li class="nav-item"><a href="#/logout">logout</a></li>
+    </ul>
+</div>
+
+<div ng-view=""></div>
+
+<script src="lib/js/jquery-1.11.1.min.js"></script>
+<script src="lib/js/angular.min.js"></script>
+<script src="lib/js/angular-route.min.js"></script>
+<script src="angular/app.js"></script>
+
+<script src="angular/js/userController.js"></script>
+
+</body>
+</html>

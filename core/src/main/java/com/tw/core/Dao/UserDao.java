@@ -14,8 +14,6 @@ import static com.tw.core.Util.HibernateUtil.getSessionFactory;
 @Repository
 public class UserDao {
 
-    PasswordEncryption passwordEncryption = new PasswordEncryption();
-
     public List<User> getUsers() throws SQLException {
 
         Session session = getSessionFactory().openSession();
@@ -57,12 +55,7 @@ public class UserDao {
         Session session = getSessionFactory().openSession();
         session.beginTransaction();
 
-        User user_insert = new User();
-        user_insert.setId(user.getId());
-        user_insert.setName(user.getName());
-        user_insert.setPassword(passwordEncryption.encodeByMD5(user.getPassword()));
-        user_insert.setEmployee(user.getEmployee());
-        session.save(user_insert);
+        session.save(user);
 
         session.getTransaction().commit();
         session.close();
@@ -100,13 +93,7 @@ public class UserDao {
         Session session = getSessionFactory().openSession();
         session.beginTransaction();
 
-        User user_update = new User();
-        user_update.setId(user.getId());
-        user_update.setName(user.getName());
-        user_update.setPassword(passwordEncryption.encodeByMD5(user.getPassword()));
-        user_update.setEmployee(user.getEmployee());
-
-        session.update(user_update);
+        session.update(user);
         session.getTransaction().commit();
         session.close();
     }
@@ -117,7 +104,7 @@ public class UserDao {
         Session session = getSessionFactory().openSession();
         session.beginTransaction();
 
-        password = passwordEncryption.encodeByMD5(password);
+//        password = passwordEncryption.encodeByMD5(password);
 
         Query query = session.createQuery("SELECT count(*) FROM User user where user.name = :name and user.password = :password");
         query.setParameter("name", name);

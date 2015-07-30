@@ -3,7 +3,7 @@ package com.tw.core.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.tw.core.Util.CookieUtil;
+import com.tw.core.service.PasswordEncryption;
 import com.tw.core.Util.HibernateProxyTypeAdapter;
 import com.tw.core.entity.Employee;
 import com.tw.core.entity.User;
@@ -15,18 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @Controller
-@RequestMapping("/user")
+@ResponseBody
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
@@ -34,6 +30,9 @@ public class UserController {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private PasswordEncryption passwordEncryption;
 
     private Gson gson = new GsonBuilder()
 //            .excludeFieldsWithoutExposeAnnotation() //不导出实体中没有用@Expose注解的属性
@@ -48,49 +47,39 @@ public class UserController {
             .create();
 
     @RequestMapping(method = RequestMethod.GET)
-    @ResponseBody
-    public String getUsers() {
+    public String getUsers(HttpServletResponse response) {
+
         List<User> userList = userService.getUsers();
+        response.setContentType("text/html;charset=utf-8");
         return gson.toJson(userList);
     }
 
+    @RequestMapping(method = RequestMethod.POST)
+    public String addUser(@RequestParam(value = "name") String userName,
+                          @RequestParam(value = "password") String userPassword,
+                          @RequestParam(value = "employeeId") int employeeId) {
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public void deleteUser(@RequestParam(value = "id") int id, HttpSession session) throws SQLException {
-            userService.deleteUsers(id);
+        Employee employee = employeeService.getOneEmployee(employeeId);
+        User user = new User(userName, passwordEncryption.encodeByMD5(userPassword), employee);
+        userService.insertUsers(user);
+        return gson.toJson(user);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void deleteUser(@RequestParam(value = "id") int id) {
+        userService.deleteUsers(id);
     }
 
 
-    @RequestMapping(value = "/modify", method = RequestMethod.GET)
-    public ModelAndView getOneUser(@RequestParam(value = "id") int id, HttpSession session,HttpServletResponse response) throws SQLException {
-        if (session.getAttribute("user") != null) {
-            return new ModelAndView("modify", "user",userService.getOneUser(id));
-        } else {
-            return new ModelAndView("redirect:" + "/login");
-        }
+    @RequestMapping(method = RequestMethod.PUT)
+    public void updateOneUser(@RequestParam(value = "id") int userId,
+                              @RequestParam(value = "name") String userName,
+                              @RequestParam(value = "password") String userPassword,
+                              @RequestParam(value = "employeeId") int employeeId) {
+
+        User user = new User(userId, userName, passwordEncryption.encodeByMD5(userPassword), employeeService.getOneEmployee(employeeId));
+        userService.UpdateOneUser(user);
     }
-
-    @RequestMapping(value = "/modify", method = RequestMethod.POST)
-    public ModelAndView updateOneUser(@RequestParam(value = "id") int userId,
-                                      @RequestParam(value = "name") String userName,
-                                      @RequestParam(value = "password") String userPassword,
-                                      @RequestParam(value = "employeeId") int employeeId,
-                                      HttpSession session) {
-        if (session.getAttribute("user") != null) {
-            User user = new User();
-            user.setId(userId);
-            user.setName(userName);
-            user.setPassword(userPassword);
-            Employee employee = employeeService.getOneEmployee(employeeId);
-            user.setEmployee(employee);
-
-            userService.UpdateOneUser(user);
-            return new ModelAndView("redirect:" + "/users");
-        } else {
-            return new ModelAndView("redirect:" + "/login");
-        }
-    }
-
 
 
 }

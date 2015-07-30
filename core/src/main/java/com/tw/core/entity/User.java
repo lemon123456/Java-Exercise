@@ -52,6 +52,22 @@ public class User {
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
+
+    public User() {
+    }
+
+    public User(String name, String password, Employee employee) {
+        this.name = name;
+        this.password = password;
+        this.employee = employee;
+    }
+
+    public User(int id, String name, String password, Employee employee) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.employee = employee;
+    }
 }
 
 
