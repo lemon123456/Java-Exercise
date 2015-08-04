@@ -7,9 +7,18 @@ angular.module('gymApp', ['ngRoute'])
                 templateUrl: 'angular/views/user.html',
                 controller: 'userController'
             })
-            //.when('/users/add',{
-            //    templateUrl: 'angular/views/userInsert.html'
-            //})
+            .when('/schedules',{
+                templateUrl: 'angular/views/schedule.html',
+                controller: 'scheduleController'
+            })
+            .when('/customer',{
+                templateUrl: 'angular/views/customer.html',
+                controller: 'customerController'
+            })
+            .when('/course',{
+                templateUrl: 'angular/views/course.html',
+                controller: 'courseController'
+            })
 
 
     });

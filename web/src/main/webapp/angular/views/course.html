@@ -1,0 +1,23 @@
+<div class="container">
+    <table class="table table-bordered">
+        <tr>
+            <td>编号</td>
+            <td>课程</td>
+            <td>描述</td>
+            <td>删除</td>
+            <td>更新</td>
+        </tr>
+        <tr ng-repeat="course in courseList">
+            <td>{{course.id}}</td>
+            <td>{{course.courseName}}</td>
+            <td>{{course.description}}</td>
+            <td>
+                <button class="button deleteButton">删除</button>
+            </td>
+            <td>
+                <button class="button updateButton">更新</button>
+            </td>
+        </tr>
+    </table>
+</div>
+

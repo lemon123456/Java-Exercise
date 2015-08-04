@@ -12,11 +12,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
         <tr ng-repeat="user in userList">
             <td>
                 <div ng-hide="hide[$index]">{{user.id}}</div>
-                <div ng-show="hide[$index]"><input type="text" ng-model="user.id" readonly="readonly"></div>
+                <div ng-show="hide[$index]"><input type="text" ng-model="user.id" ng-readonly="true"></div>
             </td>
             <td>
                 <div ng-hide="hide[$index]">{{user.name}}</div>
@@ -28,17 +27,16 @@
             </td>
             <td>
                 <div ng-hide="hide[$index]">{{user.employee.id}}</div>
-                <div ng-show="hide[$index]"><input type="text" ng-model="user.employee.id" readonly="readonly"></div>
+                <div ng-show="hide[$index]"><input type="text" ng-model="user.employee.id" ng-readonly="true"></div>
             </td>
             <td>
                 <button ng-click="delete($index,user.id)">删除用户</button>
             </td>
             <td>
                 <button ng-hide="hide[$index]" ng-click="modify($index)">修改信息</button>
-                <button ng-show="hide[$index]" ng-click="update($index,$this)">更新信息</button>
+                <button ng-show="hide[$index]" ng-click="update($index)">更新信息</button>
             </td>
         </tr>
-        <tr>
         </tbody>
     </table>
 
@@ -47,7 +45,6 @@
         用户名 :<input type="text" name="name" ng-model="name"/></br>
         密码 :<input type="password" name="password" ng-model="password"/></br>
         工号 :<input type="text" name="employeeId" ng-model="employeeId"/></br>
-        <ul></ul>
         <input type="submit" value="提交"/>
         <input type="reset" value="清空"/>
     </form>

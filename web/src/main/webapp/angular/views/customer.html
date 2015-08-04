@@ -1,0 +1,15 @@
+<div class="container">
+    <table class="table table-bordered">
+        <tr>
+            <td>编号</td>
+            <td>姓名</td>
+            <td>删除</td>
+            <td>更新</td>
+        </tr>
+
+        <tr ng-repeat="customer in customerList">
+            <td>{{customer.id}}</td>
+            <td>{{customer.customerName}}</td>
+        </tr>
+    </table>
+</div>

@@ -26,10 +26,4 @@ public class CoachDao {
         session.close();
         return coachList;
     }
-
-
-    public static void main(String arg[]) throws SQLException{
-        CoachDao coachDao = new CoachDao();
-        System.out.println(coachDao.getCoaches());
-    }
 }

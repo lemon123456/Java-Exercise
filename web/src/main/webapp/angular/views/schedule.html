@@ -1,0 +1,63 @@
+<div class="container">
+    <h2>课表管理页面</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <td>编号</td>
+            <td>课程</td>
+            <td>教练</td>
+            <td>时间</td>
+            <td>顾客</td>
+            <td>删除用户</td>
+            <td>修改信息</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="schedule in scheduleList">
+            <td>{{schedule.id}}</td>
+            <td>{{schedule.course.courseName}}</td>
+            <td>{{schedule.employee.name}}</td>
+            <td>{{schedule.time}}</td>
+            <td>{{schedule.customer}}</td>
+            <td>
+                <button ng-click="delete($index,schedule.id)">删除用户</button>
+            </td>
+            <td>
+                <button ng-click="modify($index)">修改信息</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <h3>添加公共课</h3>
+    <form ng-submit="add()">
+        <table class="table table-bordered">
+            <tr>
+                <td>课程</td>
+                <td>教练</td>
+                <td>时间</td>
+                <td>顾客</td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <select ng-model="selectedCourse" ng-options="course.id as course.courseName for course in courseList">
+                            <option value="">--choose a course--</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <select ng-model="selectedCoach" ng-options="coach.id as coach.name for coach in coachList">
+                        <option value="">--choose a coach--</option>
+                    </select>
+                </td>
+                <td><input type="date" name="time" ng-model="selectedTime"></td>
+                <td><input type="text" name="customer" ng-model="selectedCustomer"></td>
+            </tr>
+        </table>
+        <input type="submit" value="提交"/>
+        <input type="reset" value="清空">
+    </form>
+
+</div>

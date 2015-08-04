@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('gymApp')
-    .controller('userController', function ($scope, $http, $route) {
+angular.module('gymApp').controller('userController', function ($scope, $http) {
 
         $http.get('api/users').success(function (userList) {
             $scope.userList = userList;
@@ -41,7 +40,7 @@ angular.module('gymApp')
             $scope.hide[$index] = true;
         };
 
-        $scope.update = function($index,$this){
+        $scope.update = function($index){
             $http({
                 method: 'PUT',
                 url: 'api/users',
@@ -51,8 +50,9 @@ angular.module('gymApp')
                     'password': this.user.password,
                     'employeeId': this.user.employee.id
                 }
-            }).success(function(){
+            }).success(function(user){
                 $scope.hide[$index] = false;
+                $scope.userList[$index] = user;
             });
         };
 

@@ -50,7 +50,6 @@ public class UserController {
     public String getUsers(HttpServletResponse response) {
 
         List<User> userList = userService.getUsers();
-        response.setContentType("text/html;charset=utf-8");
         return gson.toJson(userList);
     }
 
@@ -70,16 +69,15 @@ public class UserController {
         userService.deleteUsers(id);
     }
 
-
     @RequestMapping(method = RequestMethod.PUT)
-    public void updateOneUser(@RequestParam(value = "id") int userId,
+    public String updateOneUser(@RequestParam(value = "id") int userId,
                               @RequestParam(value = "name") String userName,
                               @RequestParam(value = "password") String userPassword,
                               @RequestParam(value = "employeeId") int employeeId) {
 
         User user = new User(userId, userName, passwordEncryption.encodeByMD5(userPassword), employeeService.getOneEmployee(employeeId));
         userService.UpdateOneUser(user);
+        user = userService.getOneUser(userId);
+        return gson.toJson(user);
     }
-
-
 }
