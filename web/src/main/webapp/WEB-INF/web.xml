@@ -31,9 +31,6 @@
     </servlet-mapping>
 
 
-    <!--<welcome-file-list>-->
-    <!--<welcome-file>login.jsp</welcome-file>-->
-    <!--</welcome-file-list>-->
     <!--<context-param>-->
         <!--<param-name>jdbc.active.file</param-name>-->
         <!--<param-value>dev</param-value>-->

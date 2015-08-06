@@ -40,7 +40,7 @@ public class User {
     }
 
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne//(fetch = FetchType.EAGER)
     @JoinColumn(name="employeeId")
     public Employee getEmployee() {
         return employee;

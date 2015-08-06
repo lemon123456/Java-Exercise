@@ -4,8 +4,12 @@ import com.tw.core.entity.Employee;
 import com.tw.core.entity.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.transaction.Transactional;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,7 +17,12 @@ import static com.tw.core.Util.HibernateUtil.getSessionFactory;
 
 
 @Repository
+@Transactional
+@EnableTransactionManagement
 public class EmployeeDao {
+
+    @Autowired
+    private SessionFactory sessionFactory;
 
     public List<Employee> getEmployees() throws SQLException {
 
@@ -40,11 +49,13 @@ public class EmployeeDao {
 
     public Employee getOneEmployee(int id) throws SQLException{
 
-        Session session = getSessionFactory().openSession();
-        session.beginTransaction();
-        Employee employee = (Employee)session.get(Employee.class,id);
+//        Session session = getSessionFactory().openSession();
+//        session.beginTransaction();
+//        Employee employee = (Employee)session.get(Employee.class,id);
+//
+//        session.close();
 
-        session.close();
+        Employee employee = (Employee)sessionFactory.getCurrentSession().get(Employee.class, id);
         return employee;
     }
 

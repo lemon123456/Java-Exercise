@@ -37,6 +37,10 @@
             <list>
                 <value>com.tw.core.entity.User</value>
                 <value>com.tw.core.entity.Employee</value>
+                <value>com.tw.core.entity.Coach</value>
+                <value>com.tw.core.entity.Course</value>
+                <value>com.tw.core.entity.Customer</value>
+                <value>com.tw.core.entity.Schedule</value>
             </list>
         </property>
     </bean>

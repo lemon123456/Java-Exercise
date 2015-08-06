@@ -22,7 +22,7 @@ public class Schedule {
     }
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne//(fetch = FetchType.LAZY)
     @JoinColumn(name = "courseId")
     public Course getCourse() {
         return course;
@@ -32,7 +32,7 @@ public class Schedule {
         this.course = course;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne//(fetch = FetchType.LAZY)
     @JoinColumn(name = "coachId")
     public Employee getEmployee() {
         return employee;
