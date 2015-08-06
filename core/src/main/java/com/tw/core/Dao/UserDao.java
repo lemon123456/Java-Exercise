@@ -4,14 +4,19 @@ import com.tw.core.entity.Employee;
 import com.tw.core.entity.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.transaction.Transactional;
 import java.sql.*;
 import java.util.List;
 
 import static com.tw.core.Util.HibernateUtil.getSessionFactory;
 
 @Repository
+
 public class UserDao {
 
     public List<User> getUsers() throws SQLException {
@@ -19,9 +24,10 @@ public class UserDao {
         Session session = getSessionFactory().openSession();
         session.beginTransaction();
         Query query = session.createQuery("from User"); //此处User是类名，而不是数据库的表名,select * 不写
-        List<User> usersList = query.list();
+        List<User> userList = query.list();
         session.close();
-        return usersList;
+//        List<User> userList = sessionFactory.getCurrentSession().createQuery("from User").list();
+        return userList;
     }
 
 
@@ -124,7 +130,7 @@ public class UserDao {
 
     public static void main(String agrs[]) throws SQLException{
         UserDao userdao = new UserDao();
-        System.out.println(userdao.login("admin1", "123"));
+        System.out.println(userdao.getUsers().size());
     }
 
 

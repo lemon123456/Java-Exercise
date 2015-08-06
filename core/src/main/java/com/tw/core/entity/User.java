@@ -1,10 +1,6 @@
 package com.tw.core.entity;
 import javax.persistence.*;
 
-/**
- * Created by twer on 7/7/15.
- */
-
 @Entity //@Entity 注解将一个类声明为实体 Bean
 @Table(name = "User")
 

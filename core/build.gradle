@@ -17,16 +17,13 @@ dependencies {
     compile 'org.hibernate:hibernate-entitymanager:4.3.8.Final'
     compile 'org.springframework:spring-webmvc:4.1.7.RELEASE'
     compile 'javax.servlet:javax.servlet-api:3.1.0'
-
-
 }
 
 /* 指定 flyway 连接的数据的 url 和用户名称*/
 flyway {
-    url = 'jdbc:mysql://localhost:3306/userInfo'
+    url = 'jdbc:mysql://localhost:3306/userInfo';'jdbc:mysql://localhost:3306/userTest'
     user = 'root'
     password = ''
     baselineOnMigrate = true
 }
-
 

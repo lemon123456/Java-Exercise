@@ -81,15 +81,27 @@ public class ScheduleController {
 
     @RequestMapping(method = RequestMethod.POST)
     public String addSchedule(@RequestParam(value = "courseId") int courseId,
-                                    @RequestParam(value = "coachId") int coachId,
-                                    @RequestParam(value = "time") String time,
-                                    @RequestParam(value = "customer") String customer){
+                              @RequestParam(value = "coachId") int coachId,
+                              @RequestParam(value = "time") String time,
+                              @RequestParam(value = "customer") String customer) {
 
         Schedule schedule = new Schedule(courseService.getOneCourse(courseId), employeeService.getOneEmployee(coachId), time, customer);
         scheduleService.insertSchedule(schedule);
         return gson.toJson(schedule);
     }
 
+    @RequestMapping(method = RequestMethod.PUT)
+    public String updateSchedule(@RequestParam(value = "id") int id,
+                                 @RequestParam(value = "courseId") int courseId,
+                                 @RequestParam(value = "coachId") int coachId,
+                                 @RequestParam(value = "time") String time,
+                                 @RequestParam(value = "customer") String customer) throws SQLException {
+
+        Schedule schedule = new Schedule(id, courseService.getOneCourse(courseId), employeeService.getOneEmployee(coachId), time, customer);
+        scheduleService.updateOneSchedule(schedule);
+        schedule = scheduleService.getOneSchedule(id);
+        return gson.toJson(schedule);
+    }
 
 //    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 //    public ModelAndView deleteSchedule(@PathVariable("id") String id,

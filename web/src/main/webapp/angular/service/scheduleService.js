@@ -43,6 +43,24 @@ angular.module('gymApp').service('scheduleService',function($http,$filter){
             alert("Time is conflict.");
         });
     };
+
+    this.updateSchedule = function(id,courseId,coachId,time,customer,callback){
+        $http({
+            method: 'PUT',
+            url: 'api/schedules',
+            params: {
+                'id': id,
+                'courseId': courseId,
+                'coachId': coachId,
+                'time': $filter('date')(time, 'yyyy-MM-dd'),
+                'customer': customer
+            }
+        }).success(function(data){
+           callback(data);
+        }).error(function(){
+            alert("Update failed!");
+        });
+    };
 });
 
 

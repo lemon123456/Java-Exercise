@@ -8,9 +8,8 @@
     <!-- Spring配置文件 默认是在下列路径中加载（可省略），文件名称自定时必须说明下列内容-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/spring-servlet.xml</param-value>
+        <param-value>/WEB-INF/spring-servlet.xml,classpath:applicationContext.xml</param-value>
     </context-param>
-
 
     <!-- 声明WEB容器监听器，在Web容器启动时自动运行，根据contextConfigLocation参数获取Spring配置文件，并启动Spring容器 -->
     <listener>
@@ -33,8 +32,13 @@
 
 
     <!--<welcome-file-list>-->
-        <!--<welcome-file>login.jsp</welcome-file>-->
+    <!--<welcome-file>login.jsp</welcome-file>-->
     <!--</welcome-file-list>-->
+    <!--<context-param>-->
+        <!--<param-name>jdbc.active.file</param-name>-->
+        <!--<param-value>dev</param-value>-->
+    <!--</context-param>-->
+
 
 
 </web-app>

@@ -48,4 +48,16 @@ angular.module('gymApp').controller('scheduleController', function ($scope, sche
         });
     };
 
+    $scope.update = [];
+    $scope.modify = function($index){
+        $scope.update[$index] = true;
+    };
+
+    $scope.update = function($index){
+        scheduleService.updateSchedule(this.schedule.id,this.modifyCourse,this.modifyCoach,this.modifyTime,this.modifyCustomer,function(data){
+            $scope.update[$index] = false;
+            $scope.scheduleList[$index] = data;
+        });
+    };
+
 });

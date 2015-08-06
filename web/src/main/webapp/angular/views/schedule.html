@@ -14,16 +14,38 @@
         </thead>
         <tbody>
         <tr ng-repeat="schedule in scheduleList">
-            <td>{{schedule.id}}</td>
-            <td>{{schedule.course.courseName}}</td>
-            <td>{{schedule.employee.name}}</td>
-            <td>{{schedule.time}}</td>
-            <td>{{schedule.customer}}</td>
+            <td>
+                <div ng-hide="update[$index]">{{schedule.id}}</div>
+                <div ng-show="update[$index]">{{schedule.id}}</div>
+            </td>
+            <td>
+                <div ng-hide="update[$index]">{{schedule.course.courseName}}</div>
+                <div ng-show="update[$index]">
+                    <select ng-model="modifyCourse" ng-options="course.id as course.courseName for course in courseList">
+                    </select>
+                </div>
+            </td>
+            <td>
+                <div ng-hide="update[$index]">{{schedule.employee.name}}</div>
+                <div ng-show="update[$index]">
+                    <select ng-model="modifyCoach" ng-options="coach.id as coach.name for coach in coachList">
+                    </select>
+                </div>
+            </td>
+            <td>
+                <div ng-hide="update[$index]">{{schedule.time}}</div>
+                <div ng-show="update[$index]"><input type="date" ng-model="modifyTime"></div>
+            </td>
+            <td>
+                <div ng-hide="update[$index]">{{schedule.customer}}</div>
+                <div ng-show="update[$index]"><input type="text" ng-model="modifyCustomer"></div>
+            </td>
             <td>
                 <button ng-click="delete($index,schedule.id)">删除用户</button>
             </td>
             <td>
-                <button ng-click="modify($index)">修改信息</button>
+                <button ng-hide="update[$index]" ng-click="modify($index)">修改信息</button>
+                <button ng-show="update[$index]" ng-click="update($index)">更新信息</button>
             </td>
         </tr>
         </tbody>
@@ -31,6 +53,7 @@
 
 
     <h3>添加公共课</h3>
+
     <form ng-submit="add()">
         <table class="table table-bordered">
             <tr>
@@ -41,11 +64,9 @@
             </tr>
             <tr>
                 <td>
-                    <div>
-                        <select ng-model="selectedCourse" ng-options="course.id as course.courseName for course in courseList">
-                            <option value="">--choose a course--</option>
-                        </select>
-                    </div>
+                    <select ng-model="selectedCourse" ng-options="course.id as course.courseName for course in courseList">
+                        <option value="">--choose a course--</option>
+                    </select>
                 </td>
                 <td>
                     <select ng-model="selectedCoach" ng-options="coach.id as coach.name for coach in coachList">
