@@ -26,22 +26,26 @@ public class EmployeeDao {
 
     public List<Employee> getEmployees() throws SQLException {
 
-        Session session = getSessionFactory().openSession();
-        session.beginTransaction();
-        Query query = session.createQuery("from Employee"); //此处User是类名，而不是数据库的表名,select * 不写
-        List<Employee> employeeList = query.list();
-        session.close();
+//        Session session = getSessionFactory().openSession();
+//        session.beginTransaction();
+//        Query query = session.createQuery("from Employee"); //此处User是类名，而不是数据库的表名,select * 不写
+//        List<Employee> employeeList = query.list();
+//        session.close();
+
+        List<Employee> employeeList = sessionFactory.getCurrentSession().createQuery("from Employee").list();
         return employeeList;
     }
 
 
     public void insertEmployee(Employee employee) throws SQLException {
 
-        Session session = getSessionFactory().openSession();
-        session.beginTransaction();
-        session.save(employee);
-        session.getTransaction().commit();
-        session.close();
+//        Session session = getSessionFactory().openSession();
+//        session.beginTransaction();
+//        session.save(employee);
+//        session.getTransaction().commit();
+//        session.close();
+
+        sessionFactory.getCurrentSession().save(employee);
     }
 
 
@@ -62,18 +66,14 @@ public class EmployeeDao {
 
     public void UpdateOneEmployee(Employee employee) throws SQLException{
 
-        Session session = getSessionFactory().openSession();
-        session.beginTransaction();
+//        Session session = getSessionFactory().openSession();
+//        session.beginTransaction();
+//
+//        session.update(employee);
+//        session.getTransaction().commit();
+//        session.close();
 
-        session.update(employee);
-        session.getTransaction().commit();
-        session.close();
+        sessionFactory.getCurrentSession().update(employee);
     }
-
-//    public static void main(String arg[]) throws SQLException{
-//        EmployeeDao employeeDao = new EmployeeDao();
-//        Employee employee = new Employee("jame","male",11,"3","coach","YES");
-//        employeeDao.insertEmployee(employee);
-//    }
 
 }
