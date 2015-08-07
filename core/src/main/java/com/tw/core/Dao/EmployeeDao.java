@@ -18,7 +18,7 @@ import static com.tw.core.Util.HibernateUtil.getSessionFactory;
 
 @Repository
 @Transactional
-@EnableTransactionManagement
+//@EnableTransactionManagement
 public class EmployeeDao {
 
     @Autowired
